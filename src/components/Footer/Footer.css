@@ -1,0 +1,54 @@
+.footer-container {
+    color: var(--secondary-contrast-color);
+    text-align: center;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.footer-content a {
+    color: var(--secondary-contrast-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-content a:hover {
+    color: var(--signature-color);
+    text-decoration: underline;
+}
+
+.footer-content a.tmdb-link {
+    color: var(--secondary-contrast-color);
+}
+
+.footer-content a.tmdb-link:hover {
+    color: var(--signature-color);
+}
+
+.footer-icons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.footer-icon {
+    width: 30px;
+    height: 30px;
+    filter: invert(55%) sepia(10%) saturate(200%) hue-rotate(180deg);
+    transition: transform 0.2s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.footer-icon:hover {
+    transform: scale(1.1);
+    filter: invert(30%) sepia(80%) saturate(500%) hue-rotate(180deg);
+}

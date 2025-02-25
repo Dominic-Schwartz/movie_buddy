@@ -1,27 +1,24 @@
 import Button from "../../components/Button/Button";
+import InputGroup from "../../components/InputGroup/InputGroup";
+import Footer from "../../components/Footer/Footer";
 import "./LandingPage.css";
 
 const LandingPage = () => {
     return (
-        <div className="landing-container">
-            <header className="landing-header">
-                <div className="header-top">
-                    {/* Logo linksboven */}
-                    <div className="logo">
-                        <p>[Hier komt het Movie Buddy logo]</p>
-                    </div>
+        <div className="landing-main">
 
-                    {/* Inlogbutton rechtsboven */}
-                    <Button text="Inloggen" className="login-button" />
+            <nav className="navbar-container">
+                <div className="navbar-items">
+                <p className="logo">MOVIE BUDDY</p>
+                <Button text="Inloggen" />
                 </div>
+            </nav>
 
+            <header className="header-main">
                 <h1>Alles wat je moet weten over je favoriete films op één plek</h1>
                 <p>Maak een account aan en stel jouw persoonlijke watchlist samen – gratis en eenvoudig!</p>
-
-                {/* Invoervelden component komt hier */}
                 <div className="landing-input-group">
-                    <p>[Hier komt het invoervelden component]</p>
-                    <Button text="Registreren" variant="register" />
+                    <InputGroup placeholder="E-mailadres" buttonText="Registreren" />
                 </div>
             </header>
 
@@ -36,19 +33,12 @@ const LandingPage = () => {
             <section className="landing-register">
                 <p>Maak een account aan en stel jouw persoonlijke watchlist samen – gratis en eenvoudig!</p>
 
-                {/* Tweede invoervelden component komt hier */}
                 <div className="landing-input-group">
-                    <p>[Hier komt het invoervelden component]</p>
-                    <Button text="Registreren" variant="register" />
+                    <InputGroup placeholder="E-mailadres" buttonText="Registreren" />
                 </div>
             </section>
-
-            <footer className="landing-footer">
-                <p>Powered by The Movie Database (TMDb)</p>
-                <p>Gebruikersvoorwaarden & Privacyverklaring</p>
-                <div className="social-icons">
-                    <p>[Hier komen social media iconen]</p>
-                </div>
+            <footer className="footer">
+                <Footer />
             </footer>
         </div>
     );
