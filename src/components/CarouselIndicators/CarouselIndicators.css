@@ -1,0 +1,21 @@
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.indicator {
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: var(--transparent-white);
+    border: 1px solid var(--secondary-contrast-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.indicator.active {
+    background-color: var(--signature-color);
+    transform: scale(1.1);
+}

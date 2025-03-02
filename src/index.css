@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* 🔄 CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 🎨 Kleurvariabelen */
+:root {
+    --signature-color: #1D0DF9;
+    --main-contrast-color: #FFFFFF;
+    --secondary-contrast-color: #B3B3B3;
+    --main-background-color: #000000;
+    --secondary-background-color: #101010;
+    --transparent-white: rgba(255, 255, 255, 0.2);
+}
+
+/* 🌍 Algemene body styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--main-background-color);
+    color: var(--main-contrast-color);
+}
+

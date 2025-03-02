@@ -1,0 +1,67 @@
+/* main */
+.landing-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    position: relative;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%),
+    url('../../assets/images/background-image-main.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* nav */
+.navbar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4.5rem;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    width: 100%;
+}
+
+.navbar-items {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.logo {
+    color: var(--signature-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* sections */
+.header-main, .landing-features, .landing-register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 50%
+}
+
+.header-main h1 {
+    font-size: 2rem;
+}
+
+.header-main p {
+    font-size: 0.8rem;
+}
+
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+/* footer */
+.footer {
+    width: 100%;
+    background-color: var(--secondary-background-color);
+}
