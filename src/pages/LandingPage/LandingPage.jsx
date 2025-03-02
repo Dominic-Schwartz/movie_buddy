@@ -1,5 +1,6 @@
 import Button from "../../components/Button/Button";
 import InputGroup from "../../components/InputGroup/InputGroup";
+import Carousel from "../../components/Carousel/Carousel";
 import Footer from "../../components/Footer/Footer";
 import "./LandingPage.css";
 
@@ -26,8 +27,7 @@ const LandingPage = () => {
                 <h2>Wat heeft Movie Buddy jou te bieden?</h2>
                 <p>Ontdek de nieuwste films, bekijk trailers en lees uitgebreide informatie over je favorieten.</p>
 
-                {/* Hier komt de carousel component */}
-                <p>[Hier komt de Carousel component]</p>
+                <Carousel />
             </section>
 
             <section className="landing-register">

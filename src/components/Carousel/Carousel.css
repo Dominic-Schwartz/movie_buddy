@@ -1,0 +1,23 @@
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    flex: 0 0 calc(100% / 3);
+    text-align: center;
+}
+
+.carousel-image {
+    width: 100%;
+    border: 1px solid var(--main-contrast-color)
+}
+
