@@ -1,5 +1,8 @@
 .carousel-container {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 1200px;
     margin: auto;
@@ -8,11 +11,14 @@
 
 .carousel {
     display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
     transition: transform 0.5s ease-in-out;
 }
 
 .carousel-item {
-    flex: 0 0 calc(100% / 3);
+    flex: 0 1 calc(33.33% - 20px);
     text-align: center;
 }
 

@@ -26,13 +26,14 @@ const LandingPage = () => {
             <section className="landing-features">
                 <h2>Wat heeft Movie Buddy jou te bieden?</h2>
                 <p>Ontdek de nieuwste films, bekijk trailers en lees uitgebreide informatie over je favorieten.</p>
+            </section>
 
+            <section className="carousel">
                 <Carousel />
             </section>
 
             <section className="landing-register">
                 <p>Maak een account aan en stel jouw persoonlijke watchlist samen – gratis en eenvoudig!</p>
-
                 <div className="landing-input-group">
                     <InputGroup placeholder="E-mailadres" buttonText="Registreren" />
                 </div>

@@ -53,6 +53,13 @@
     font-size: 0.8rem;
 }
 
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
 /* footer */
 .footer {
     width: 100%;
