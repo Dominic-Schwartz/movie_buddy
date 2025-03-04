@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchTrendingMovies } from "../../helpers/fetchMovies";
+import { formatImageUrl } from "../../helpers/formatImageUrl";
 import CarouselIndicators from "../CarouselIndicators/CarouselIndicators.jsx";
 import "./Carousel.css";
 
@@ -23,14 +24,14 @@ const Carousel = () => {
         getMovies().catch(error => console.error("Unhandled error in getMovies:", error));
     }, []);
 
-        useEffect(() => {
+    useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
         }, 5000);
         return () => clearInterval(interval);
     }, []);
 
-        const goToSlide = (index) => {
+    const goToSlide = (index) => {
         setCurrentIndex(index);
     };
 
@@ -39,19 +40,23 @@ const Carousel = () => {
             <div className="carousel">
                 {movies
                     .slice(currentIndex * itemsPerPage, currentIndex * itemsPerPage + itemsPerPage)
-                    .map((movie) => (
-                        <div key={movie.id} className="carousel-item">
-                            {movie.poster_path ? (
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                                    alt={movie.title}
-                                    className="carousel-image"
-                                />
-                            ) : (
-                                <div className="carousel-placeholder">Geen afbeelding</div>
-                            )}
-                        </div>
-                    ))}
+                    .map((movie) => {
+                        const posterUrl = formatImageUrl(movie.poster_path);
+
+                        return (
+                            <div key={movie.id} className="carousel-item">
+                                {movie.poster_path ? (
+                                    <img
+                                        src={posterUrl}
+                                        alt={movie.title}
+                                        className="carousel-image"
+                                    />
+                                ) : (
+                                    <div className="carousel-placeholder">Geen afbeelding</div>
+                                )}
+                            </div>
+                        );
+                    })}
             </div>
 
             <CarouselIndicators
