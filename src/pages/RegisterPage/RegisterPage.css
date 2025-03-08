@@ -1,0 +1,120 @@
+.auth-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.auth-left {
+    flex: 0 0 900px;
+    background-color: var(--main-background-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    color: var(--main-contrast-color);
+    padding: 2rem;
+}
+
+.auth-right {
+    flex: 1 1 auto;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.85), transparent 50%),
+    url('../../assets/images/background-image-auth.jpg') center/cover no-repeat;
+    min-height: 100vh;
+}
+
+.logo-container {
+    display: flex;
+    height: 15%;
+    width: 90%;
+    justify-content: flex-start;
+}
+
+.logo a {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--signature-color);
+    text-decoration: none;
+    margin-bottom: 2rem;
+}
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    padding-top: 2.2rem;
+    gap: 2.5rem;
+}
+
+.register-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.terms {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.terms input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    outline: none;
+    position: relative;
+}
+
+.terms input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.terms label {
+    cursor: pointer;
+}
+
+.login-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.login-link a {
+    color: var(--main-contrast-color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.login-link a:hover {
+    color: var(--signature-color);
+}
+
+@media (max-width: 768px) {
+    .auth-right {
+        display: none;
+    }
+
+    .auth-left {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}

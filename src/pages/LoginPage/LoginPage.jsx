@@ -10,13 +10,16 @@ const LoginPage = () => {
 
                 <div className="logo-container">
                     <p className="logo">
-                    <a href="/">MOVIE BUDDY</a>
+                        <a href="/">MOVIE BUDDY</a>
                     </p>
                 </div>
 
                 <div className="login-container">
                     <h2>Inloggen</h2>
-                    <InputField type="email" placeholder="E-mailadres" />
+
+                    <InputField
+                        type="email"
+                        placeholder="E-mailadres" />
                     <InputField type="password" placeholder="Wachtwoord" />
                     <Button text="Inloggen" variant="default" />
                     <p className="forgot-password">Wachtwoord vergeten?</p>

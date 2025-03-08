@@ -3,17 +3,16 @@ import PropTypes from "prop-types";
 import PasswordToggle from "../PasswordToggle/PasswordToggle";
 import "./InputField.css";
 
-const InputField = ({ type, placeholder, value, onChange }) => {
+const InputField = ({ type, placeholder, value, onChange, className }) => {
     const [internalValue, setInternalValue] = useState("");
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     const handleToggle = () => {
-        setIsPasswordVisible(!isPasswordVisible);
+        setIsPasswordVisible((prev) => !prev);
     };
 
     const handleChange = (e) => {
         const newValue = e.target.value;
-
         if (!onChange) {
             setInternalValue(newValue);
         } else {
@@ -22,7 +21,7 @@ const InputField = ({ type, placeholder, value, onChange }) => {
     };
 
     return (
-        <div className="input-field-container">
+        <div className={`input-field-container ${className ? className : ""}`}>
             <input
                 type={type === "password" && isPasswordVisible ? "text" : type}
                 placeholder={placeholder}
@@ -42,6 +41,7 @@ InputField.propTypes = {
     placeholder: PropTypes.string.isRequired,
     value: PropTypes.string,
     onChange: PropTypes.func,
+    className: PropTypes.string,
 };
 
 export default InputField;
