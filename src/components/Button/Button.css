@@ -2,9 +2,10 @@
     font-family: "Poppins", sans-serif;
     font-size: 1rem;
     font-weight: 600;
-    padding: 5px 20px;
+    height: 50px;
+    padding: 5px 25px;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -20,19 +21,6 @@
 }
 
 .btn.register {
-    border-radius: 0 10px 10px 0;
+    border-radius: 0 15px 15px 0;
 }
 
-@media (max-width: 768px) {
-    .btn {
-        font-size: 0.75rem;
-        padding: 3px 16px;
-    }
-}
-
-@media (max-width: 480px) {
-    .btn {
-        font-size: 0.6rem;
-        padding: 0 12px;
-    }
-}
