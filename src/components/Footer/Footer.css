@@ -18,11 +18,12 @@
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease-in-out;
+    cursor: pointer;
 }
 
 .footer-content a:hover {
     color: var(--signature-color);
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .footer-content a.tmdb-link {

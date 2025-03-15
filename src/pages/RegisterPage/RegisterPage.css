@@ -57,7 +57,7 @@
 .terms {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
     font-size: 0.9rem;
     text-align: left;
 }
@@ -78,8 +78,8 @@
 .terms input[type="checkbox"]:checked::after {
     content: "";
     position: absolute;
-    top: 2px;
-    left: 6px;
+    top: 3px;
+    left: 8px;
     width: 5px;
     height: 10px;
     border: solid #fff;
@@ -87,8 +87,15 @@
     transform: rotate(45deg);
 }
 
-.terms label {
+.user-terms-link, .privacy-terms-link {
     cursor: pointer;
+    color: var(--main-contrast-color);
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.user-terms-link:hover, .privacy-terms-link:hover {
+    color: var(--signature-color);
 }
 
 .login-link {

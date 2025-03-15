@@ -12,7 +12,7 @@
 }
 
 .error-popup {
-    background: #fff;
+    background: var(--main-contrast-color);
     border: 1px solid var(--signature-color);
     padding: 1rem 2rem;
     border-radius: 15px;
