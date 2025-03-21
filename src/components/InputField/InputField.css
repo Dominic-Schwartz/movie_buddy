@@ -41,7 +41,13 @@
     flex-direction: row;
 }
 
+.input-field-container.input-field--group .input-field {
+    border-radius: 15px 0 0 15px;
+    background-color: var(--transparent-white);
+}
+
 input:-webkit-autofill {
     -webkit-text-fill-color: var(--main-contrast-color) !important;
     transition: background-color 5000s ease-in-out 0s;
 }
+

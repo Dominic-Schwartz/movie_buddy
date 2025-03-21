@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
@@ -11,6 +11,22 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const [searchTerm, setSearchTerm] = useState("");
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     const handleLogoClick = () => {
         if (location.pathname === "/home") {
@@ -29,7 +45,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="navbar">
+        <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
             <div className="navbar-container">
                 <div className="navbar-left">
                     <div className="logo" onClick={handleLogoClick}>
