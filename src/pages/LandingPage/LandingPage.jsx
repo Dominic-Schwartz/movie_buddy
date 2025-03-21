@@ -12,7 +12,7 @@ const LandingPage = () => {
         <div className="landing-main">
             <nav className="navbar-container">
                 <div className="navbar-items">
-                    <p className="logo">MOVIE BUDDY</p>
+                    <p className="logo-only">MOVIE BUDDY</p>
                     <Button text="Inloggen" onClick={() => navigate("/login")} />
                 </div>
             </nav>

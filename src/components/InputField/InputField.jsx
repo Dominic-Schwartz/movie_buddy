@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import PasswordToggle from "../PasswordToggle/PasswordToggle";
+import SearchIconButton from "../SearchIconButton/SearchIconButton";
 import "./InputField.css";
 
 const InputField = ({
@@ -10,6 +11,8 @@ const InputField = ({
                         onChange,
                         className = "",
                         showToggle = false,
+                        showSearchIcon = false,
+                        onSearchIconClick,
                     }) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -30,11 +33,16 @@ const InputField = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={handleInputChange}
-                onInput={handleInputChange}
                 className="input-field"
             />
+
             {type === "password" && showToggle && (
                 <PasswordToggle isVisible={isPasswordVisible} onToggle={handleToggle} />
+            )}
+
+
+            {showSearchIcon && (
+                <SearchIconButton onClick={onSearchIconClick} />
             )}
         </div>
     );
@@ -47,6 +55,8 @@ InputField.propTypes = {
     onChange: PropTypes.func,
     className: PropTypes.string,
     showToggle: PropTypes.bool,
+    showSearchIcon: PropTypes.bool,
+    onSearchIconClick: PropTypes.func,
 };
 
 export default InputField;

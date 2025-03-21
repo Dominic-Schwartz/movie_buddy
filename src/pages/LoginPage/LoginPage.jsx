@@ -1,6 +1,7 @@
 import "./LoginPage.css";
 import InputField from "../../components/InputField/InputField";
 import Button from "../../components/Button/Button";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
     return (
@@ -26,6 +27,7 @@ const LoginPage = () => {
                     <p className="register-link">
                     Nog geen Movie Buddy account? <a href="/register">Meld je dan hier aan.</a>
                     </p>
+                    <Link to="/home">Ga naar HomePage (tijdelijk)</Link>
                 </div>
 
             </div>
