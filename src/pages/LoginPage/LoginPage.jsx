@@ -22,7 +22,7 @@ const LoginPage = () => {
                         type="email"
                         placeholder="E-mailadres" />
                     <InputField type="password" placeholder="Wachtwoord" />
-                    <Button text="Inloggen" variant="default" />
+                    <Button text="Inloggen" variant="login" />
                     <p className="forgot-password">Wachtwoord vergeten?</p>
                     <p className="register-link">
                     Nog geen Movie Buddy account? <a href="/register">Meld je dan hier aan.</a>

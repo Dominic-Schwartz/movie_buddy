@@ -13,7 +13,7 @@ const LandingPage = () => {
             <div className="landing-header">
                 <div className="landing-header-content">
                     <p className="logo-only">MOVIE BUDDY</p>
-                    <Button text="Inloggen" onClick={() => navigate("/login")} />
+                    <Button text="Inloggen" variant="login" onClick={() => navigate("/login")} />
                 </div>
             </div>
 

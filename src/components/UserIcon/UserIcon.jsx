@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import "./UserIconButton.css";
+import "./UserIcon.css";
 import userIcon from "../../assets/svgs/user.svg";
 
-const UserIconButton = ({ onClick }) => {
+const UserIcon = ({ onClick }) => {
     return (
         <button type="button" className="user-icon-button" onClick={onClick}>
             <img src={userIcon} alt="User Icon" />
@@ -10,12 +10,12 @@ const UserIconButton = ({ onClick }) => {
     );
 };
 
-UserIconButton.propTypes = {
+UserIcon.propTypes = {
     onClick: PropTypes.func,
 };
 
-UserIconButton.defaultProps = {
+UserIcon.defaultProps = {
     onClick: () => {},
 };
 
-export default UserIconButton;
+export default UserIcon;

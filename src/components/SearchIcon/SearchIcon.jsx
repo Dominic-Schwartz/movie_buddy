@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import "./SearchIconButton.css";
+import "./SearchIcon.css";
 import searchIcon from "../../assets/svgs/search.svg";
 
-const SearchIconButton = ({ onClick }) => {
+const SearchIcon = ({ onClick }) => {
     return (
         <button type="button" className="search-icon-button" onClick={onClick}>
             <img src={searchIcon} alt="Search icon" />
@@ -10,12 +10,12 @@ const SearchIconButton = ({ onClick }) => {
     );
 };
 
-SearchIconButton.propTypes = {
+SearchIcon.propTypes = {
     onClick: PropTypes.func,
 };
 
-SearchIconButton.defaultProps = {
+SearchIcon.defaultProps = {
     onClick: () => {},
 };
 
-export default SearchIconButton;
+export default SearchIcon;

@@ -4,7 +4,7 @@ import "./Navbar.css";
 
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
-import UserIconButton from "../UserIconButton/UserIconButton"; // Nieuwe import
+import UserIcon from "../UserIcon/UserIcon.jsx"; // Nieuwe import
 
 const Navbar = () => {
     const location = useLocation();
@@ -70,7 +70,7 @@ const Navbar = () => {
                         />
                     </div>
 
-                    <UserIconButton onClick={() => console.log("Gebruikersicoon geklikt")} />
+                    <UserIcon onClick={() => console.log("Gebruikersicoon geklikt")} />
                 </div>
             </div>
         </nav>

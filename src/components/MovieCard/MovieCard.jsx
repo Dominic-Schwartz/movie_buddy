@@ -2,21 +2,20 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import "./MovieCard.css";
 
-import watchlistIcon from "../../assets/svgs/plus.svg";
-import watchlistRemoveIcon from "../../assets/svgs/minus.svg";
-import thumbsUpIcon from "../../assets/svgs/thumbs-up.svg";
-import thumbsDownIcon from "../../assets/svgs/thumbs-down.svg";
+import Button from "../Button/Button"; // bestaande component
+import PlusIcon from "../../assets/svgs/plus.svg";
+import MinIcon from "../../assets/svgs/minus.svg";
+import ThumbsUpIcon from "../../assets/svgs/thumbs-up.svg";
+import ThumbsDownIcon from "../../assets/svgs/thumbs-down.svg";
 
 const MovieCard = ({ movie, onClick }) => {
     const [isInWatchlist, setIsInWatchlist] = useState(false);
     const [liked, setLiked] = useState(null);
 
-    // Toggle watchlist status
     const handleWatchlistToggle = () => {
         setIsInWatchlist(!isInWatchlist);
     };
 
-    // Toggle like/dislike
     const handleLike = () => {
         setLiked(liked === true ? null : true);
     };
@@ -33,36 +32,39 @@ const MovieCard = ({ movie, onClick }) => {
             />
 
             <div className="movie-actions">
-                <button
-                    className={`watchlist-btn ${isInWatchlist ? "active" : ""}`}
+                <Button
+                    text="watchlist"
+                    icon={isInWatchlist ? MinIcon : PlusIcon}
+                    iconPosition="left"
                     onClick={(e) => {
                         e.stopPropagation();
                         handleWatchlistToggle();
                     }}
-                >
-                    <img src={isInWatchlist ? watchlistRemoveIcon : watchlistIcon} alt="Watchlist"/>
-                    <span>Watchlist</span>
-                </button>
+                    className={`btn-moviecard-watchlist ${isInWatchlist ? "active" : ""}`}
+                />
 
-                <button
-                    className={`like-btn ${liked === true ? "active" : ""}`}
+                <Button
+                    icon={ThumbsUpIcon}
+                    iconPosition="left"
                     onClick={(e) => {
                         e.stopPropagation();
                         handleLike();
                     }}
-                >
-                    <img src={thumbsUpIcon} alt="Like" />
-                </button>
+                    className={`btn-like-icon ${liked === true ? "active" : ""}`}
+                    variant="ghost"
+                />
 
-                <button
-                    className={`dislike-btn ${liked === false ? "active" : ""}`}
+                <Button
+                    icon={ThumbsDownIcon}
+                    iconPosition="left"
                     onClick={(e) => {
                         e.stopPropagation();
                         handleDislike();
                     }}
-                >
-                    <img src={thumbsDownIcon} alt="Dislike" />
-                </button>
+                    className={`btn-like-icon ${liked === false ? "active" : ""}`}
+                    variant="ghost"
+                />
+
             </div>
         </div>
     );

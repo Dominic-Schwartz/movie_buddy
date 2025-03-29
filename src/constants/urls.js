@@ -11,3 +11,16 @@ export const SOCIAL_MEDIA_LINKS = {
     instagram: "https://www.instagram.com/...",
     youtube: "https://www.youtube.com/...",
 };
+
+export const GENRE_IDS = {
+    action: 28,
+    thriller: 53,
+    comedy: 35,
+    fantasy: 14,
+    romance: 10749,
+    scifi: 878,
+    horror: 27,
+    animation: 16,
+    drama: 18,
+    adventure: 12,
+};

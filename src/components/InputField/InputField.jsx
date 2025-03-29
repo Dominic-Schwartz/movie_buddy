@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import PasswordToggle from "../PasswordToggle/PasswordToggle";
-import SearchIconButton from "../SearchIconButton/SearchIconButton";
+import SearchIcon from "../SearchIcon/SearchIcon.jsx";
 import "./InputField.css";
 
 const InputField = ({
@@ -42,7 +42,7 @@ const InputField = ({
 
 
             {showSearchIcon && (
-                <SearchIconButton onClick={onSearchIconClick} />
+                <SearchIcon onClick={onSearchIconClick} />
             )}
         </div>
     );
