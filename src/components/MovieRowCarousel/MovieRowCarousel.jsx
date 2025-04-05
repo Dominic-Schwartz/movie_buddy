@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import {useLayoutEffect} from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import MovieCard from "../MovieCard/MovieCard";
@@ -12,44 +11,58 @@ const MovieRowCarousel = ({ title, fetchFunction, genreId }) => {
     const [movies, setMovies] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
+    const containerRef = useRef(null);
+    const navigate = useNavigate();
 
     useLayoutEffect(() => {
         const updateItemsPerPage = () => {
-            const width = window.innerWidth;
-            if (width < 600) {
-                setItemsPerPage(2);
-            } else if (width < 900) {
-                setItemsPerPage(3);
-            } else if (width < 1400) {
-                setItemsPerPage(4);
-            } else {
-                setItemsPerPage(5);
+            const containerWidth = containerRef.current?.offsetWidth || window.innerWidth;
+
+            let cardWidth = 240;
+            if (containerWidth <= 600) {
+                cardWidth = 170;
+            } else if (containerWidth <= 900) {
+                cardWidth = 200;
+            } else if (containerWidth <= 1200) {
+                cardWidth = 220;
             }
+
+            const maxCards = Math.floor((containerWidth + 24) / cardWidth);
+            setItemsPerPage(Math.max(2, maxCards));
         };
 
-        updateItemsPerPage(); // bij mount
+        updateItemsPerPage();
         window.addEventListener("resize", updateItemsPerPage);
         return () => window.removeEventListener("resize", updateItemsPerPage);
     }, []);
 
-    const navigate = useNavigate();
-
     useEffect(() => {
-        const loadMovies = async () => {
-            const fetched = await fetchFunction();
-            setMovies(fetched);
-        };
-        loadMovies();
+        (async () => {
+            try {
+                const fetched = await fetchFunction();
+                setMovies(fetched);
+            } catch (error) {
+                console.error(error);
+            }
+        })();
     }, [fetchFunction]);
 
     const totalSlides = Math.ceil(movies.length / itemsPerPage);
 
     const handlePrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
     const handleNext = () => setCurrentIndex((prev) => Math.min(prev + 1, totalSlides - 1));
-    const handleSeeAll = () => navigate(`/searchresults?genre=${genreId || title.toLowerCase()}`);
+    const handleSeeAll = () => {
+        const genreQuery = genreId
+            ? genreId
+            : title.toLowerCase().includes("trending")
+                ? "trending"
+                : title.toLowerCase();
+
+        navigate(`/searchresults?genre=${genreQuery}`);
+    };
 
     return (
-        <div className="movie-row-carousel">
+        <div className="movie-row-carousel" ref={containerRef}>
             <div className="movie-row-header">
                 <div className="movie-row-left">
                     <h2 className="movie-row-title">{title}</h2>
@@ -70,11 +83,11 @@ const MovieRowCarousel = ({ title, fetchFunction, genreId }) => {
             <div className="movie-row-cards">
                 {movies
                     .slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage)
-                    .map((movie) => (
+                    .map(({ id, poster_path, title }) => (
                         <MovieCard
-                            key={movie.id}
-                            movie={{ poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}` }}
-                            onClick={() => console.log(`Naar detailpagina van ${movie.title}`)}
+                            key={id}
+                            movie={{ poster: `https://image.tmdb.org/t/p/w500${poster_path}` }}
+                            onClick={() => console.log(`Naar detailpagina van ${title}`)}
                         />
                     ))}
             </div>

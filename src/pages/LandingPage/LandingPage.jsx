@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import InputGroup from "../../components/InputGroup/InputGroup";
-import Carousel from "../../components/Carousel/Carousel";
+import SlideShowCarousel from "../../components/SlideShowCarousel/SlideShowCarousel.jsx";
 import Footer from "../../components/Footer/Footer";
 import "./LandingPage.css";
 
@@ -31,7 +31,7 @@ const LandingPage = () => {
             </section>
 
             <section className="carousel-section">
-                <Carousel />
+                <SlideShowCarousel />
             </section>
 
             <section className="register-section">

@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { fetchTrendingMovies } from "../../helpers/fetchMovies";
 import { formatImageUrl } from "../../helpers/formatImageUrl";
 import CarouselIndicators from "../CarouselIndicators/CarouselIndicators.jsx";
-import "./Carousel.css";
+import "./SlideShowCarousel.css";
 
-const Carousel = () => {
+const SlideShowCarousel = () => {
     const [movies, setMovies] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const itemsPerPage = 3;
@@ -68,4 +68,4 @@ const Carousel = () => {
     );
 };
 
-export default Carousel;
+export default SlideShowCarousel;

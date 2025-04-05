@@ -1,28 +1,55 @@
 import "./HomePage.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer.jsx";
-import { fetchTrendingMovies } from "../../helpers/fetchMovies";
 import MovieRowCarousel from "../../components/MovieRowCarousel/MovieRowCarousel";
+import TrailerCarousel from "../../components/TrailerCarousel/TrailerCarousel.jsx";
 
+import {
+    fetchTrendingMovies,
+    fetchActionMovies,
+    fetchThrillerMovies,
+    fetchComedyMovies,
+    fetchFantasyMovies,
+    fetchRomanceMovies,
+    fetchSciFiMovies,
+    fetchHorrorMovies,
+    fetchAnimationMovies,
+    fetchDramaMovies,
+    fetchAdventureMovies
+} from "../../helpers/fetchMovies";
+
+const movieRows = [
+    { title: "Trending Films", fetchFunction: () => fetchTrendingMovies(18) },
+    { title: "Actie", fetchFunction: fetchActionMovies },
+    { title: "Thriller", fetchFunction: fetchThrillerMovies },
+    { title: "Komedie", fetchFunction: fetchComedyMovies },
+    { title: "Fantasy", fetchFunction: fetchFantasyMovies },
+    { title: "Romantiek", fetchFunction: fetchRomanceMovies },
+    { title: "Science Fiction", fetchFunction: fetchSciFiMovies },
+    { title: "Horror", fetchFunction: fetchHorrorMovies },
+    { title: "Animatie", fetchFunction: fetchAnimationMovies },
+    { title: "Drama", fetchFunction: fetchDramaMovies },
+    { title: "Avontuur", fetchFunction: fetchAdventureMovies },
+];
 
 const HomePage = () => {
     return (
         <div className="homePage">
             <Navbar/>
 
-            {/* Hero-sectie (carousel/trailer) */}
-            <section className="hero">
-                <h2>Hero / Carousel komt hier</h2>
-            </section>
+            <TrailerCarousel />
 
-            <MovieRowCarousel
-                title="Trending Films"
-                fetchFunction={fetchTrendingMovies}
-            />
+            {movieRows.map((row, index) => (
+                <section key={index} className="carousel-section">
+                    <MovieRowCarousel
+                        title={row.title}
+                        fetchFunction={row.fetchFunction}
+                    />
+                </section>
+            ))}
 
-            <footer className="footer">
-                <Footer/>
-            </footer>
+            <Footer/>
+
         </div>
     );
 };

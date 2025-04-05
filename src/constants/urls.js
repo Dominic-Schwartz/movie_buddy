@@ -13,14 +13,15 @@ export const SOCIAL_MEDIA_LINKS = {
 };
 
 export const GENRE_IDS = {
-    action: 28,
+    actie: 28,
     thriller: 53,
-    comedy: 35,
+    komedie: 35,
     fantasy: 14,
-    romance: 10749,
-    scifi: 878,
+    romantiek: 10749,
+    "science fiction": 878,
     horror: 27,
-    animation: 16,
+    animatie: 16,
     drama: 18,
-    adventure: 12,
+    avontuur: 12,
 };
+
