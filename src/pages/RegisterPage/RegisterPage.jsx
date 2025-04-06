@@ -55,7 +55,7 @@ const RegisterPage = () => {
 
                     <TermsCheckbox isAccepted={isAccepted} setIsAccepted={setIsAccepted} openPopup={openPopup} />
 
-                    <Button text={loading ? "Bezig met registreren..." : "Aanmelden"} type="submit" onClick={handleRegister} disabled={loading} />
+                    <Button text={loading ? "Bezig met registreren..." : "Aanmelden"} variant="login" type="submit" onClick={handleRegister} disabled={loading} />
 
                     <p className="login-link">Heb je al een Movie Buddy account? <a href="/login">Dan kun je hier inloggen.</a></p>
                 </div>

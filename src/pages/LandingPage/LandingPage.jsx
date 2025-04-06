@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import InputGroup from "../../components/InputGroup/InputGroup";
-import Carousel from "../../components/Carousel/Carousel";
+import SlideShowCarousel from "../../components/SlideShowCarousel/SlideShowCarousel.jsx";
 import Footer from "../../components/Footer/Footer";
 import "./LandingPage.css";
 
@@ -10,14 +10,14 @@ const LandingPage = () => {
 
     return (
         <div className="landing-main">
-            <nav className="navbar-container">
-                <div className="navbar-items">
-                    <p className="logo">MOVIE BUDDY</p>
-                    <Button text="Inloggen" onClick={() => navigate("/login")} />
+            <div className="landing-header">
+                <div className="landing-header-content">
+                    <p className="logo-only">MOVIE BUDDY</p>
+                    <Button text="Inloggen" variant="login" onClick={() => navigate("/login")} />
                 </div>
-            </nav>
+            </div>
 
-            <header className="header-main">
+            <header className="hero-section">
                 <h1>Alles wat je moet weten over je favoriete films op één plek</h1>
                 <p>Maak een account aan en stel jouw persoonlijke watchlist samen – gratis en eenvoudig!</p>
                 <div className="landing-input-group">
@@ -25,23 +25,23 @@ const LandingPage = () => {
                 </div>
             </header>
 
-            <section className="landing-features">
+            <section className="features-section">
                 <h2>Wat heeft Movie Buddy jou te bieden?</h2>
                 <p>Ontdek de nieuwste films, bekijk trailers en lees uitgebreide informatie over je favorieten.</p>
             </section>
 
-            <section className="carousel">
-                <Carousel />
+            <section className="carousel-section">
+                <SlideShowCarousel />
             </section>
 
-            <section className="landing-register">
+            <section className="register-section">
                 <p>Maak een account aan en stel jouw persoonlijke watchlist samen – gratis en eenvoudig!</p>
                 <div className="landing-input-group">
                     <InputGroup placeholder="E-mailadres" buttonText="Registreren" onClick={() => navigate("/register")} />
                 </div>
             </section>
 
-            <footer className="footer">
+            <footer className="landing-footer">
                 <Footer />
             </footer>
         </div>

@@ -1,0 +1,30 @@
+.homePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    position: relative;
+    width: 100%;
+}
+
+.homePage::before {
+    content: "";
+    position: fixed; /* Of absolute als je geen fixed effect wilt */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+            linear-gradient(to bottom, rgba(0,0,0,0.3) 60%, rgba(0,0,0,1)),
+            url('../../assets/images/background-image-main.jpg');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.carousel-section {
+    margin-bottom: 1rem;
+}
+

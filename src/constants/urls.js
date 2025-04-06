@@ -11,3 +11,17 @@ export const SOCIAL_MEDIA_LINKS = {
     instagram: "https://www.instagram.com/...",
     youtube: "https://www.youtube.com/...",
 };
+
+export const GENRE_IDS = {
+    actie: 28,
+    thriller: 53,
+    komedie: 35,
+    fantasy: 14,
+    romantiek: 10749,
+    "science fiction": 878,
+    horror: 27,
+    animatie: 16,
+    drama: 18,
+    avontuur: 12,
+};
+
