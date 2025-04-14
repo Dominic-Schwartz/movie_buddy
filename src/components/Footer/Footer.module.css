@@ -1,21 +1,22 @@
-.footer-container {
+.footerContainer {
     color: var(--secondary-contrast-color);
     text-align: center;
     width: 100%;
     background-color: var(--secondary-background-color);
     padding: 20px 0;
+    margin-top: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
 }
 
-.footer-content p {
+.footerContent p {
     margin: 5px 0;
     font-size: 0.9rem;
 }
 
-.footer-content a {
+.footerContent a {
     color: var(--secondary-contrast-color);
     text-decoration: none;
     font-weight: 600;
@@ -23,20 +24,15 @@
     cursor: pointer;
 }
 
-.footer-content a:hover {
-    color: var(--signature-color);
-    text-decoration: none;
-}
-
-.footer-content a.tmdb-link {
-    color: var(--secondary-contrast-color);
-}
-
-.footer-content a.tmdb-link:hover {
+.footerContent a:hover {
     color: var(--signature-color);
 }
 
-.footer-icons {
+.termsLink {
+    margin: 0 4px;
+}
+
+.footerIcons {
     display: flex;
     gap: 15px;
     justify-content: center;
@@ -44,14 +40,32 @@
     margin-top: 10px;
 }
 
-.footer-icon {
+.footerIcon {
     width: 30px;
     height: 30px;
     filter: invert(55%) sepia(10%) saturate(200%) hue-rotate(180deg);
     transition: transform 0.2s ease-in-out, filter 0.3s ease-in-out;
 }
 
-.footer-icon:hover {
+.footerIcon:hover {
     transform: scale(1.1);
     filter: invert(30%) sepia(80%) saturate(500%) hue-rotate(180deg);
+}
+
+.footerDisclaimer {
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .footerContent p,
+    .footerDisclaimer {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footerContent p,
+    .footerDisclaimer {
+        font-size: 0.65rem;
+    }
 }

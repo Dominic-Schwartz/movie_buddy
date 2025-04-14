@@ -10,7 +10,7 @@
 
 .homePage::before {
     content: "";
-    position: fixed; /* Of absolute als je geen fixed effect wilt */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -25,6 +25,8 @@
 }
 
 .carousel-section {
-    margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
 }
-

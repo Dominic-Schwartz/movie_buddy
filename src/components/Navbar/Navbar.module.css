@@ -1,0 +1,113 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8rem;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+    transition: background-color 0.3s ease-in-out, height 0.3s ease-in-out;
+    backdrop-filter: blur(5px);
+}
+
+.scrolled {
+    background: var(--secondary-background-color);
+    height: 7rem;
+}
+
+.navbarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1500px;
+    padding: 0.5rem 0;
+    gap: 2rem;
+}
+
+.navbarLeft {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    flex: 1 1 auto;
+    gap: 1rem;
+    flex-wrap: nowrap;
+}
+
+.logo {
+    cursor: pointer;
+    flex-shrink: 1;
+    flex-grow: 0;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.logoText {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--signature-color);
+}
+
+.buttonGroup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbarRight {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 2 0 auto;
+    gap: 1.5rem;
+}
+
+.searchWrapper {
+    max-width: 330px;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .buttonGroup {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .logoText {
+        font-size: 1.5rem;
+        line-height: 1.1;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbarContainer {
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .navbarLeft, .navbarRight {
+        justify-content: center;
+        flex: unset;
+    }
+
+    .searchWrapper {
+        width: 100%;
+    }
+
+    .logoText {
+        font-size: 1rem;
+        text-align: center;
+    }
+}
+
+.navbarLeft,
+.navbarRight,
+.searchWrapper,
+.logo {
+    outline: 1px dashed rgba(255,255,255,0.3);
+}

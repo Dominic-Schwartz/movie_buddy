@@ -1,10 +1,10 @@
-.movie-row-carousel {
-    width: 90%;
-    max-width: 1500px;
+.movieRowCarousel {
+    width: 85%;
+    max-width: 1350px;
     margin: 0 auto 3rem;
 }
 
-.movie-row-header {
+.movieRowHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,23 +12,22 @@
     margin-bottom: 1rem;
 }
 
-.movie-row-left {
+.movieRowLeft {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.movie-row-title {
+.movieRowTitle {
     font-size: 1.5rem;
-    color: white;
 }
 
-.movie-row-arrows {
+.movieRowArrows {
     display: flex;
     gap: 0.5rem;
 }
 
-.arrow-btn {
+.arrowBtn {
     background: none;
     border: none;
     cursor: pointer;
@@ -37,19 +36,19 @@
     padding: 0;
 }
 
-.arrow-btn img {
+.arrowBtn img {
     width: 100%;
     height: 100%;
     filter: invert(100%);
     transition: transform 0.2s ease;
 }
 
-.arrow-btn:hover img {
+.arrowBtn:hover img {
     transform: scale(1.2);
     filter: invert(30%) sepia(80%) saturate(500%) hue-rotate(180deg);
 }
 
-.see-all-btn {
+.seeAllBtn {
     background: none;
     border: none;
     color: white;
@@ -59,24 +58,41 @@
     transition: color 0.2s ease-in-out;
 }
 
-.see-all-btn:hover {
+.seeAllBtn:hover {
     color: var(--signature-color);
 }
 
-.movie-row-cards {
+.movieRowCards {
     display: flex;
-    gap: 1.5rem;
-    justify-content: space-around;
+    gap: 2.2rem;
+    justify-content: flex-start;
 }
 
 @media (max-width: 768px) {
-    .movie-row-cards {
-        gap: 1rem;
+    .movieRowCards {
+        gap: 1.5rem;
+    }
+
+    .movieRowTitle {
+        font-size: 1.3rem;
+    }
+
+    .arrowBtn {
+        width: 24px;
+        height: 24px;
     }
 }
 
-@media (max-width: 768px) {
-    .arrow-btn {
+@media (max-width: 480px) {
+    .movieRowCards {
+        gap: 1rem;
+    }
+
+    .movieRowTitle {
+        font-size: 1.1rem;
+    }
+
+    .arrowBtn {
         width: 24px;
         height: 24px;
     }

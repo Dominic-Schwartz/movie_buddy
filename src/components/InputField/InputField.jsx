@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import PasswordToggle from "../PasswordToggle/PasswordToggle";
 import SearchIcon from "../SearchIcon/SearchIcon.jsx";
-import "./InputField.css";
+import styles from "./InputField.module.css";
 
 const InputField = ({
                         type,
@@ -26,24 +26,27 @@ const InputField = ({
         }
     };
 
+    const containerClassNames = [
+        styles.inputFieldContainer,
+        showSearchIcon ? styles.search : "",
+        className
+    ].join(" ").trim();
+
     return (
-        <div className={`input-field-container ${className}`}>
+        <div className={containerClassNames}>
             <input
                 type={type === "password" && isPasswordVisible ? "text" : type}
                 placeholder={placeholder}
                 value={value}
                 onChange={handleInputChange}
-                className="input-field"
+                className={`${styles.inputField} ${className}`}
             />
 
             {type === "password" && showToggle && (
                 <PasswordToggle isVisible={isPasswordVisible} onToggle={handleToggle} />
             )}
 
-
-            {showSearchIcon && (
-                <SearchIcon onClick={onSearchIconClick} />
-            )}
+            {showSearchIcon && <SearchIcon onClick={onSearchIconClick} />}
         </div>
     );
 };

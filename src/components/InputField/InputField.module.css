@@ -1,8 +1,8 @@
-.input-field {
+.inputField {
     width: 100%;
     height: 3rem;
     padding: 7px 20px;
-    font-size: 1rem;
+    font-size: 0.8rem;
     flex: 1;
     color: var(--main-contrast-color);
     background-color: transparent;
@@ -12,42 +12,37 @@
     transition: border-color 0.3s ease-in-out;
 }
 
-.input-field-container {
+.inputFieldContainer {
     position: relative;
     width: 100%;
     display: flex;
     align-items: center;
 }
 
-.input-field-container.search {
+.search {
     position: relative;
+    width: 100%;
 }
 
-.input-field-container.search .input-field {
+.search .inputField {
     padding-right: 45px;
 }
 
-.input-field::placeholder {
+.inputField::placeholder {
     color: var(--secondary-contrast-color);
     font-weight: 300;
 }
 
-.input-field:focus {
+.inputField:focus {
     border-color: var(--signature-color);
 }
 
-.input-field-container.inline {
+.inline {
     display: flex;
     flex-direction: row;
-}
-
-.input-field-container.input-field--group .input-field {
-    border-radius: 15px 0 0 15px;
-    background-color: var(--transparent-white);
 }
 
 input:-webkit-autofill {
     -webkit-text-fill-color: var(--main-contrast-color) !important;
     transition: background-color 5000s ease-in-out 0s;
 }
-

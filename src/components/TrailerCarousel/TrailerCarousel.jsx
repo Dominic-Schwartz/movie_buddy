@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { fetchTrendingMoviesWithTrailers } from "../../helpers/fetchTrailers";
 import CarouselIndicators from "../CarouselIndicators/CarouselIndicators";
-import "./TrailerCarousel.css";
+import TrailerPlayer from "../TrailerPlayer/TrailerPlayer";
+import styles from "./TrailerCarousel.module.css";
 
 const TrailerCarousel = () => {
     const [moviesWithTrailers, setMoviesWithTrailers] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const totalSlides = 3; // Aantal slides dat getoond wordt
+    const totalSlides = 3;
 
     useEffect(() => {
         const getTrailers = async () => {
@@ -24,11 +25,10 @@ const TrailerCarousel = () => {
         );
     }, []);
 
-
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
-        }, 8000);
+        }, 10000);
         return () => clearInterval(interval);
     }, [totalSlides]);
 
@@ -41,17 +41,12 @@ const TrailerCarousel = () => {
     const goToSlide = (index) => setCurrentIndex(index);
 
     return (
-        <div className="trailer-carousel-container">
+        <div className={styles.trailerCarouselContainer}>
             {moviesWithTrailers.length > 0 && moviesWithTrailers[currentIndex] && (
-                <div className="trailer-frame-wrapper">
-                    <iframe
-                        className="trailer-video"
-                        src={`https://www.youtube.com/embed/${moviesWithTrailers[currentIndex].trailer.key}?mute=1&controls=1`}
-                        title={moviesWithTrailers[currentIndex].title}
-                        allow="autoplay; encrypted-media"
-                        allowFullScreen
-                    ></iframe>
-                </div>
+                <TrailerPlayer
+                    movieId={moviesWithTrailers[currentIndex].id}
+                    title={moviesWithTrailers[currentIndex].title}
+                />
             )}
 
             <CarouselIndicators

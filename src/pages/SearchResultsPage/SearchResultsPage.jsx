@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import { fetchMoviesByGenreName } from "../../helpers/fetchMovies";
-import "./SearchResultsPage.css";
+import styles from "./SearchResultsPage.module.css";
 
 const SearchResultsPage = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const queryParams = new URLSearchParams(location.search);
     const genre = queryParams.get("genre");
 
@@ -27,18 +28,19 @@ const SearchResultsPage = () => {
     }, [genre]);
 
     return (
-        <div className="search-results-page">
+        <div className={styles.searchResultsPage}>
             <Navbar />
-            <main className="results-container">
-                <h2 className="results-title">{genre}</h2>
-                <div className="results-grid">
+            <main className={styles.resultsContainer}>
+                <h2 className={styles.resultsTitle}>{genre}</h2>
+                <div className={styles.resultsGrid}>
                     {movies.map(({ id, poster_path, title }) => (
                         <MovieCard
                             key={id}
                             movie={{
                                 poster: `https://image.tmdb.org/t/p/w500${poster_path}`,
+                                title,
                             }}
-                            onClick={() => console.log(`Klik op: ${title}`)}
+                            onClick={() => navigate(`/movie/${id}`)}
                         />
                     ))}
                 </div>

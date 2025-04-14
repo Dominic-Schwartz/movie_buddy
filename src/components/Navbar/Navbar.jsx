@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./Navbar.css";
-
+import styles from "./Navbar.module.css";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
-import UserIcon from "../UserIcon/UserIcon.jsx"; // Nieuwe import
+import UserIcon from "../UserIcon/UserIcon.jsx";
 
 const Navbar = () => {
     const location = useLocation();
@@ -45,20 +44,22 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
-            <div className="navbar-container">
-                <div className="navbar-left">
-                    <div className="logo" onClick={handleLogoClick}>
-                        <span className="logo-text">MOVIE BUDDY</span>
+        <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}>
+            <div className={styles.navbarContainer}>
+                <div className={styles.navbarLeft}>
+                    <div className={styles.logo} onClick={handleLogoClick}>
+                        <span className={styles.logoText}>MOVIE BUDDY</span>
                     </div>
 
-                    <Button text="Genres" className="nav-btn" onClick={() => console.log("Genres")} />
-                    <Button text="TOP 10" className="nav-btn" onClick={() => console.log("TOP 10")} />
-                    <Button text="Watchlist" className="nav-btn" onClick={() => console.log("Watchlist")} />
+                    <div className={styles.buttonGroup}>
+                        <Button text="Genres" variant="navbar" onClick={() => console.log("Genres")} />
+                        <Button text="TOP 10" variant="navbar" onClick={() => console.log("TOP 10")} />
+                        <Button text="Watchlist" variant="navbar" onClick={() => console.log("Watchlist")} />
+                    </div>
                 </div>
 
-                <div className="navbar-right">
-                    <div className="search-wrapper">
+                <div className={styles.navbarRight}>
+                    <div className={styles.searchWrapper}>
                         <InputField
                             type="text"
                             placeholder="Zoeken"
