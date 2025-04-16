@@ -51,9 +51,9 @@
 }
 
 /* =========================
-   VARIANT: WATCHLIST BUTTON
+   VARIANTEN: WATCHLIST, REVIEW
 ========================= */
-.watchlist {
+.watchlist, .review {
     background-color: transparent;
     border: 2px solid var(--main-contrast-color);
     font-size: 1rem;
@@ -74,7 +74,7 @@
     animation: buttonPop 0.2s ease-in-out;
 }
 
-.watchlist img {
+.watchlist img, .review img {
     width: 1.4rem;
     height: 1.4rem;
     filter: invert(100%) brightness(200%) grayscale(100%);
@@ -134,13 +134,14 @@
         font-size: 1.125rem;
     }
 
-    .watchlist {
+    .watchlist, .review {
         font-size: 0.8rem;
         padding: 0.1rem 0.4rem;
         height: 1.8rem;
     }
 
     .watchlist img,
+    .review img,
     .like img,
     .dislike img {
         width: 1rem;
@@ -152,16 +153,6 @@
         width: 1.8rem;
         height: 1.8rem;
     }
-
-    .watchlistIcon {
-        width: 0.625rem;
-        height: 0.625rem;
-    }
-
-    .likeIcon {
-        width: 0.9375rem;
-        height: 0.9375rem;
-    }
 }
 
 @media (max-width: 480px) {
@@ -170,14 +161,15 @@
         font-size: 1rem;
     }
 
-    .watchlist {
+    .watchlist, .review {
         font-size: 0.6rem;
         padding: 0 0.2rem;
         height: 1.8rem;
         gap: 0;
     }
 
-    .watchlist img {
+    .watchlist img,
+    .review img {
         height: 0.9rem;
         width: 0.9rem;
     }
