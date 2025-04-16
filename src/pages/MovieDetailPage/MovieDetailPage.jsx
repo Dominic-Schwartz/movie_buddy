@@ -1,9 +1,7 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import axios from "axios";
-import { TMDB_BASE_URL } from "../../constants/urls";
 import TrailerPlayer from "../../components/TrailerPlayer/TrailerPlayer";
 
 import Button from "../../components/Button/Button";
@@ -12,16 +10,12 @@ import MinIcon from "../../assets/svgs/minus.svg";
 import ThumbsUpIcon from "../../assets/svgs/thumbs-up.svg";
 import ThumbsDownIcon from "../../assets/svgs/thumbs-down.svg";
 import BubbleIcon from "../../assets/svgs/bubble.svg";
-
 import styles from "./MovieDetailPage.module.css";
 
-const API_KEY = import.meta.env.VITE_API_KEY;
+import { useMovieDetails } from "../../hooks/useMovieDetails";
 
 const MovieDetailPage = () => {
     const { id } = useParams();
-    const [movie, setMovie] = useState(null);
-    const [credits, setCredits] = useState(null);
-    const [ageRating, setAgeRating] = useState(null);
 
     // States voor de actieknoppen
     const [isInWatchlist, setIsInWatchlist] = useState(false);
@@ -30,42 +24,8 @@ const MovieDetailPage = () => {
     const [likePercentage] = useState(98);
     const [dislikePercentage] = useState(2);
 
-    useEffect(() => {
-        const fetchMovieDetails = async () => {
-            try {
-                const [movieRes, creditsRes, ratingsRes] = await Promise.all([
-                    axios.get(`${TMDB_BASE_URL}/movie/${id}`, {
-                        params: { api_key: API_KEY, language: "nl-NL" },
-                    }),
-                    axios.get(`${TMDB_BASE_URL}/movie/${id}/credits`, {
-                        params: { api_key: API_KEY },
-                    }),
-                    axios.get(`${TMDB_BASE_URL}/movie/${id}/release_dates`, {
-                        params: { api_key: API_KEY },
-                    }),
-                ]);
+    const { movie, credits, ageRating } = useMovieDetails(id);
 
-                setMovie(movieRes.data);
-                setCredits(creditsRes.data);
-
-                const nlRating = ratingsRes.data.results.find(
-                    (r) => r?.iso_3166_1 === "NL"
-                );
-                const usRating = ratingsRes.data.results.find(
-                    (r) => r?.iso_3166_1 === "US"
-                );
-
-                const rating =
-                    nlRating?.release_dates?.[0]?.certification ||
-                    usRating?.release_dates?.[0]?.certification;
-                setAgeRating(rating || "n.v.t.");
-            } catch (error) {
-                console.error("Fout bij ophalen details:", error);
-            }
-        };
-
-        if (id) void fetchMovieDetails();
-    }, [id]);
 
     const getCrewMembers = (job) =>
         credits?.crew
