@@ -1,0 +1,98 @@
+.castRow {
+    width: 95%;
+    max-width: 1500px;
+    margin: 1rem auto 3rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.arrows {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.arrowBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+}
+
+.arrowBtn img {
+    width: 100%;
+    height: 100%;
+    filter: invert(100%);
+    transition: transform 0.2s ease;
+}
+
+.arrowBtn:hover img {
+    transform: scale(1.2);
+    filter: invert(30%) sepia(80%) saturate(500%) hue-rotate(180deg);
+}
+
+.toggleBtn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.2s ease-in-out;
+}
+
+.toggleBtn:hover {
+    color: var(--signature-color);
+}
+
+.cardContainer {
+    display: flex;
+    gap: 2.2rem;
+    justify-content: space-between;
+}
+
+.expandedGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.2rem;
+    justify-content: space-around;
+}
+
+@media (max-width: 768px) {
+    .castRow {
+        margin: 0 auto;
+    }
+
+    .cardContainer {
+        gap: 1.5rem;
+    }
+
+    .arrowBtn {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardContainer {
+        gap: 1rem;
+    }
+
+    .arrowBtn {
+        width: 24px;
+        height: 24px;
+    }
+}

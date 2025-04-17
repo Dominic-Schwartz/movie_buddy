@@ -3,8 +3,9 @@ import { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import TrailerPlayer from "../../components/TrailerPlayer/TrailerPlayer";
-
 import Button from "../../components/Button/Button";
+import CastCardRow from "../../components/CastCardRow/CastCardRow";
+
 import PlusIcon from "../../assets/svgs/plus.svg";
 import MinIcon from "../../assets/svgs/minus.svg";
 import ThumbsUpIcon from "../../assets/svgs/thumbs-up.svg";
@@ -168,7 +169,10 @@ const MovieDetailPage = () => {
                 ) : (
                     <p>Filmgegevens worden geladen...</p>
                 )}
+
+                {credits?.cast && <CastCardRow cast={credits.cast} />}
             </main>
+
             <Footer />
         </div>
     );
