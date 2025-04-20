@@ -5,6 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import TrailerPlayer from "../../components/TrailerPlayer/TrailerPlayer";
 import Button from "../../components/Button/Button";
 import CastCardRow from "../../components/CastCardRow/CastCardRow";
+import ReviewCardCarousel from "../../components/ReviewCardCarousel/ReviewCardCarousel";
 
 import PlusIcon from "../../assets/svgs/plus.svg";
 import MinIcon from "../../assets/svgs/minus.svg";
@@ -57,6 +58,30 @@ const MovieDetailPage = () => {
         // Hier komt logica voor het plaatsen van een review
         console.log("Review button clicked!");
     };
+
+    const dummyReviews = [
+        {
+            id: 1,
+            username: "Movie_F@n#1",
+            text: "Loved it!! Dit is een wat langere tekst om te testen of de kaart groeit.",
+            date: "25-1-2025",
+            reaction: "like",
+        },
+        {
+            id: 2,
+            username: "Cin@m_All",
+            text: "Seen better!",
+            date: "2-1-2025",
+            reaction: "dislike",
+        },
+        {
+            id: 3,
+            username: "M0v13M@n!4C",
+            text: "Best Movie ever!",
+            date: "15-5-2024",
+            reaction: "like",
+        },
+    ];
 
     return (
         <>
@@ -168,6 +193,9 @@ const MovieDetailPage = () => {
                         <p>Filmgegevens worden geladen...</p>
                     )}
                     {credits?.cast && <CastCardRow cast={credits.cast} />}
+
+                    <ReviewCardCarousel reviews={dummyReviews} />
+
                 </main>
 
                 <Footer />

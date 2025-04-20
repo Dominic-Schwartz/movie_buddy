@@ -26,10 +26,6 @@
 /* =========================
    VARIANTEN: DEFAULT, LOGIN, NAVBAR
 ========================= */
-.default {
-    background-color: gray;
-}
-
 .landingLogin {
     background-color: var(--signature-color);
     width: 9.4rem;
