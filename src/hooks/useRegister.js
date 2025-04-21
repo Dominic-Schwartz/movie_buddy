@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerUser } from "../helpers/api";
+import { registerUser } from "../helpers/api.js";
 import { validateInput, measurePasswordStrength } from "../helpers/validateInput";
 
 const useRegister = (initialEmail = "") => {

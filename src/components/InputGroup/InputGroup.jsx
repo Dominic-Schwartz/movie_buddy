@@ -7,13 +7,14 @@ import { isValidEmail } from "../../helpers/emailValidation";
 import ErrorPopup from "../ErrorPopup/ErrorPopup";
 import styles from "./InputGroup.module.css";
 
-const InputGroup = ({ placeholder, buttonText }) => {
+const InputGroup = ({ placeholder, buttonText, onClick }) => {
     const [email, setEmail] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
-    const handleEmailChange = (newEmail) => {
-        setEmail(newEmail);
+    const handleEmailChange = (e) => {
+        const value = e.target.value;
+        setEmail(value);
         if (errorMessage) {
             setErrorMessage("");
         }
@@ -26,6 +27,7 @@ const InputGroup = ({ placeholder, buttonText }) => {
             setErrorMessage("Voer een geldig e-mailadres in.");
         } else {
             setErrorMessage("");
+            if (onClick) return onClick(email);
             navigate("/register", { state: { email } });
         }
     };
@@ -57,6 +59,7 @@ const InputGroup = ({ placeholder, buttonText }) => {
 InputGroup.propTypes = {
     placeholder: PropTypes.string.isRequired,
     buttonText: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
 };
 
 export default InputGroup;
