@@ -71,7 +71,9 @@ const Navbar = () => {
                         />
                     </div>
 
-                    <UserIcon onClick={() => console.log("Gebruikersicoon geklikt")} />
+                    <UserIcon
+                        onClick={() =>
+                        console.log("Gebruikersicoon geklikt")} />
                 </div>
             </div>
         </nav>

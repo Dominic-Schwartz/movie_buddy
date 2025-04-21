@@ -81,6 +81,13 @@ const MovieDetailPage = () => {
             date: "15-5-2024",
             reaction: "like",
         },
+        {
+            id: 4,
+            username: "Dud3",
+            text: "Whatever!",
+            date: "15-5-2024",
+            reaction: "like",
+        },
     ];
 
     return (

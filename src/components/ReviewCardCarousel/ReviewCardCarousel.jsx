@@ -5,36 +5,32 @@ import arrowLeft from "../../assets/svgs/arrowtriangle-left.svg";
 import arrowRight from "../../assets/svgs/arrowtriangle-right.svg";
 import styles from "./ReviewCardCarousel.module.css";
 
+import { useCircularIndex } from "../../hooks/useCircularIndex";
+
 const ReviewCardCarousel = ({ reviews }) => {
     const containerRef = useRef(null);
-    const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(3);
     const [expanded, setExpanded] = useState(false);
 
-    // bepaal itemsPerPage op basis van viewport‑breedte
+    const totalSlides = Math.ceil((reviews.length || 1) / itemsPerPage);
+
+    const { index: currentIndex, prev: handlePrev, next: handleNext, setIndex } =
+        useCircularIndex(totalSlides);
+
     useLayoutEffect(() => {
         const updateItems = () => {
             const w = containerRef.current?.offsetWidth || window.innerWidth;
             if (w < 480) setItemsPerPage(1);
             else if (w < 768) setItemsPerPage(2);
             else setItemsPerPage(3);
-            // reset naar eerste slide als er minder slides zijn
-            setCurrentIndex(0);
+            setIndex(0);
         };
 
         updateItems();
         window.addEventListener("resize", updateItems);
         return () => window.removeEventListener("resize", updateItems);
-    }, []);
+    }, [setIndex]);
 
-    const totalSlides = Math.ceil(reviews.length / itemsPerPage);
-
-    const handlePrev = () =>
-        setCurrentIndex((idx) => Math.max(idx - 1, 0));
-    const handleNext = () =>
-        setCurrentIndex((idx) => Math.min(idx + 1, totalSlides - 1));
-
-    // geen reviews? toon enkel placeholder
     if (!reviews || reviews.length === 0) {
         return (
             <div className={styles.reviewPlaceholder}>

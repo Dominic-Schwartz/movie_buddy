@@ -1,5 +1,4 @@
 .reviewCard {
-    /* 375px / 16 = 23.4375rem, 275px / 16 = 17.1875rem */
     width: 23.4375rem;
     min-height: 17.1875rem;
     background-color: var(--secondary-background-color);
@@ -24,12 +23,12 @@
 }
 
 .username {
-    font-size: 0.875rem; /* 14px */
+    font-size: 0.875rem;
     font-weight: 600;
 }
 
 .body {
-    flex: 1; /* zorgt dat de tekst de ruimte pakt */
+    flex: 1;
 }
 
 .body p {

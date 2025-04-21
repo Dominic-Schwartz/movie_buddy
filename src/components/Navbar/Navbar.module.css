@@ -47,7 +47,7 @@
 }
 
 .logoText {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 800;
     color: var(--signature-color);
 }
@@ -71,20 +71,20 @@
     width: 100%;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 925px) {
     .buttonGroup {
         display: none;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 725px) {
     .logoText {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         line-height: 1.1;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 485px) {
     .navbarContainer {
         align-items: stretch;
         gap: 1rem;
@@ -100,14 +100,8 @@
     }
 
     .logoText {
-        font-size: 1rem;
+        font-size: 1.3rem;
         text-align: center;
     }
 }
 
-.navbarLeft,
-.navbarRight,
-.searchWrapper,
-.logo {
-    outline: 1px dashed rgba(255,255,255,0.3);
-}

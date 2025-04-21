@@ -1,39 +1,38 @@
-import { useState, useEffect, useLayoutEffect, useRef  } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import MovieCard from "../MovieCard/MovieCard";
 import styles from "./MovieRowCarousel.module.css";
-
 import arrowLeft from "../../assets/svgs/arrowtriangle-left.svg";
 import arrowRight from "../../assets/svgs/arrowtriangle-right.svg";
 
+import { useCircularIndex } from "../../hooks/useCircularIndex";
+
 const MovieRowCarousel = ({ title, fetchFunction, genreId }) => {
     const [movies, setMovies] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
     const containerRef = useRef(null);
     const navigate = useNavigate();
+
+    const totalSlides = Math.ceil((movies.length || 1) / itemsPerPage);
+
+    const { index: currentIndex, prev: handlePrev, next: handleNext } =
+        useCircularIndex(totalSlides);
 
     useLayoutEffect(() => {
         const updateItemsPerPage = () => {
             const containerWidth = containerRef.current?.offsetWidth || window.innerWidth;
 
-            if (containerWidth >= 1250) {
-                setItemsPerPage(5);
-            } else if (containerWidth >= 1075) {
-                setItemsPerPage(4);
-            } else if (containerWidth >= 825) {
-                setItemsPerPage(3);
-            } else {
-                setItemsPerPage(2);
-            }
+            if (containerWidth >= 1250) setItemsPerPage(5);
+            else if (containerWidth >= 1075) setItemsPerPage(4);
+            else if (containerWidth >= 800) setItemsPerPage(3);
+            else setItemsPerPage(2);
         };
 
         updateItemsPerPage();
         window.addEventListener("resize", updateItemsPerPage);
         return () => window.removeEventListener("resize", updateItemsPerPage);
     }, []);
-
 
     useEffect(() => {
         (async () => {
@@ -46,10 +45,6 @@ const MovieRowCarousel = ({ title, fetchFunction, genreId }) => {
         })();
     }, [fetchFunction]);
 
-    const totalSlides = Math.ceil(movies.length / itemsPerPage);
-
-    const handlePrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
-    const handleNext = () => setCurrentIndex((prev) => Math.min(prev + 1, totalSlides - 1));
     const handleSeeAll = () => {
         const genreQuery = genreId
             ? genreId
@@ -80,7 +75,10 @@ const MovieRowCarousel = ({ title, fetchFunction, genreId }) => {
 
             <div className={styles.movieRowCards}>
                 {movies
-                    .slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage)
+                    .slice(
+                        currentIndex * itemsPerPage,
+                        (currentIndex + 1) * itemsPerPage
+                    )
                     .map(({ id, poster_path }) => (
                         <MovieCard
                             key={id}

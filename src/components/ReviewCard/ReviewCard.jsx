@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import UserIcon from "../../components/UserIcon/UserIcon.jsx"; // of import de icon uit je navbar‑folder
+import UserIcon from "../../components/UserIcon/UserIcon.jsx";
 import ThumbsUpIcon from "../../assets/svgs/thumbs-up.svg";
 import ThumbsDownIcon from "../../assets/svgs/thumbs-down.svg";
 import styles from "./ReviewCard.module.css";
@@ -8,7 +8,7 @@ const ReviewCard = ({
                         username,
                         text,
                         date,
-                        reaction, // "like" of "dislike"
+                        reaction,
                         onShowAll,
                     }) => {
     const ReactionIcon = reaction === "like" ? ThumbsUpIcon : ThumbsDownIcon;
