@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./Button.css";
+import styles from "./Button.module.css";
 
 const Button = ({
                     text,
@@ -8,13 +8,28 @@ const Button = ({
                     className = "",
                     icon = null,
                     iconPosition = "left",
+                    active = false,
                 }) => {
-    return (
-        <button className={`btn ${variant} ${className}`} {...(onClick && {onClick})}>
 
-            {icon && iconPosition === "left" && <img src={icon} alt="icon" className="btn-icon"/>}
+    const activeClass =
+        active && variant === "watchlist"
+            ? styles.watchlistActive
+            : active && variant === "like"
+                ? styles.likeActive
+                : active && variant === "dislike"
+                    ? styles.dislikeActive
+                    : "";
+
+    const combinedClass = `${styles.btn} ${styles[variant]} ${activeClass} ${className}`.trim();
+
+    return (
+        <button
+            className={combinedClass}
+            {...(onClick && { onClick })}
+        >
+            {icon && iconPosition === "left" && <img src={icon} alt="icon" />}
             {text && <span>{text}</span>}
-            {icon && iconPosition === "right" && <img src={icon} alt="icon" className="btn-icon"/>}
+            {icon && iconPosition === "right" && <img src={icon} alt="icon" />}
         </button>
     );
 };
@@ -26,6 +41,7 @@ Button.propTypes = {
     className: PropTypes.string,
     icon: PropTypes.string,
     iconPosition: PropTypes.oneOf(["left", "right"]),
+    active: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -35,6 +51,7 @@ Button.defaultProps = {
     className: "",
     icon: null,
     iconPosition: "left",
+    active: false,
 };
 
 export default Button;

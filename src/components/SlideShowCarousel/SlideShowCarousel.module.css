@@ -1,0 +1,59 @@
+.carouselContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 90%;
+    max-width: 900px;
+    margin: 2rem;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: stretch;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.carouselItem {
+    flex: 1 1 calc(33.33% - 1rem);
+    max-width: calc(33.33% - 1rem);
+    text-align: center;
+}
+
+.carouselImage {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--main-contrast-color);
+    object-fit: cover;
+}
+
+.carouselPlaceholder {
+    width: 100%;
+    height: 300px;
+    background-color: #333;
+    color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fadeSlide {
+    animation: fadeSlideIn 0.4s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

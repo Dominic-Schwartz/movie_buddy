@@ -1,0 +1,52 @@
+.castCard {
+    width: 9.375rem;
+    height: 17.1875rem;
+    border: 1px solid var(--main-contrast-color);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-background-color);
+    overflow: hidden;
+}
+
+.imageWrapper {
+    width: 100%;
+    height: 12.1875rem;
+    overflow: hidden;
+}
+
+.imageWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info {
+    flex: 1;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.actorName {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.characterName {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #ccc;
+    margin: 0;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

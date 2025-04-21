@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { fetchTrendingMovies } from "../../helpers/fetchMovies";
 import { formatImageUrl } from "../../helpers/formatImageUrl";
 import CarouselIndicators from "../CarouselIndicators/CarouselIndicators.jsx";
-import "./SlideShowCarousel.css";
+import styles from "./SlideShowCarousel.module.css";
 
 const SlideShowCarousel = () => {
     const [movies, setMovies] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(false);
     const itemsPerPage = 3;
     const totalSlides = 3;
 
@@ -26,33 +27,39 @@ const SlideShowCarousel = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
+            const nextIndex = (currentIndex + 1) % totalSlides;
+            setCurrentIndex(nextIndex);
+            setTimeout(() => setIsTransitioning(true), 10);
+            setTimeout(() => setIsTransitioning(false), 400);
         }, 5000);
+
         return () => clearInterval(interval);
-    }, []);
+    }, [currentIndex, totalSlides]);
 
     const goToSlide = (index) => {
         setCurrentIndex(index);
+        setTimeout(() => setIsTransitioning(true), 10);
+        setTimeout(() => setIsTransitioning(false), 400);
     };
 
     return (
-        <div className="carousel-container">
-            <div className="carousel">
+        <div className={styles.carouselContainer}>
+            <div className={`${styles.carousel} ${isTransitioning ? styles.fadeSlide : ""}`}>
                 {movies
                     .slice(currentIndex * itemsPerPage, currentIndex * itemsPerPage + itemsPerPage)
                     .map((movie) => {
                         const posterUrl = formatImageUrl(movie.poster_path);
 
                         return (
-                            <div key={movie.id} className="carousel-item">
+                            <div key={movie.id} className={styles.carouselItem}>
                                 {movie.poster_path ? (
                                     <img
                                         src={posterUrl}
                                         alt={movie.title}
-                                        className="carousel-image"
+                                        className={styles.carouselImage}
                                     />
                                 ) : (
-                                    <div className="carousel-placeholder">Geen afbeelding</div>
+                                    <div className={styles.carouselPlaceholder}>Geen afbeelding</div>
                                 )}
                             </div>
                         );

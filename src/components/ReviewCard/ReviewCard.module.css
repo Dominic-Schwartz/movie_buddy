@@ -1,0 +1,73 @@
+.reviewCard {
+    width: 23.4375rem;
+    min-height: 17.1875rem;
+    background-color: var(--secondary-background-color);
+    border: 0.0625rem solid var(--main-contrast-color);
+    border-radius: 0.9375rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.userIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.username {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.body {
+    flex: 1;
+}
+
+.body p {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin: 0 0 1rem 0;
+    word-break: break-word;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reactionIcon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.date {
+    font-size: 0.875rem;
+}
+
+.showAll {
+    background: none;
+    border: none;
+    font-size: 0.875rem;
+    color: var(--signature-color);
+    cursor: pointer;
+    padding: 0;
+}
+
+.showAll:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,29 @@
+.trailerWrapper {
+    width: 90%;
+    max-width: 1350px;
+    aspect-ratio: 16 / 8.7;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--main-contrast-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.trailerVideo {
+    width: 100%;
+    height: 100%;
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.trailerFallback {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}

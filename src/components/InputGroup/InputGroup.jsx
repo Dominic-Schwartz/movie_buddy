@@ -5,7 +5,7 @@ import InputField from "../InputField/InputField";
 import Button from "../Button/Button";
 import { isValidEmail } from "../../helpers/emailValidation";
 import ErrorPopup from "../ErrorPopup/ErrorPopup";
-import "./InputGroup.css";
+import styles from "./InputGroup.module.css";
 
 const InputGroup = ({ placeholder, buttonText }) => {
     const [email, setEmail] = useState("");
@@ -32,11 +32,11 @@ const InputGroup = ({ placeholder, buttonText }) => {
 
     return (
         <>
-            <div className="input-group">
+            <div className={styles.inputGroup}>
                 <InputField
                     type="email"
                     placeholder={placeholder}
-                    className="input-field--group"
+                    className={styles.inputFieldGroup}
                     value={email}
                     onChange={handleEmailChange}
                 />

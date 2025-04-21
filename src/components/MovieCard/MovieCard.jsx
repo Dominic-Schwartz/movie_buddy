@@ -1,8 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import "./MovieCard.css";
-
-import Button from "../Button/Button"; // bestaande component
+import styles from "./MovieCard.module.css";
+import Button from "../Button/Button";
 import PlusIcon from "../../assets/svgs/plus.svg";
 import MinIcon from "../../assets/svgs/minus.svg";
 import ThumbsUpIcon from "../../assets/svgs/thumbs-up.svg";
@@ -25,13 +24,13 @@ const MovieCard = ({ movie, onClick }) => {
     };
 
     return (
-        <div className="movie-card" onClick={onClick}>
+        <div className={styles.movieCard} onClick={onClick}>
             <div
-                className="movie-poster"
+                className={styles.moviePoster}
                 style={{ backgroundImage: `url(${movie.poster})` }}
             />
 
-            <div className="movie-actions">
+            <div className={styles.movieActions}>
                 <Button
                     text="watchlist"
                     icon={isInWatchlist ? MinIcon : PlusIcon}
@@ -40,7 +39,8 @@ const MovieCard = ({ movie, onClick }) => {
                         e.stopPropagation();
                         handleWatchlistToggle();
                     }}
-                    className={`btn-moviecard-watchlist ${isInWatchlist ? "active" : ""}`}
+                    variant="watchlist"
+                    active={isInWatchlist}
                 />
 
                 <Button
@@ -50,8 +50,8 @@ const MovieCard = ({ movie, onClick }) => {
                         e.stopPropagation();
                         handleLike();
                     }}
-                    className={`btn-like-icon ${liked === true ? "active" : ""}`}
-                    variant="ghost"
+                    variant="like"
+                    active={liked === true}
                 />
 
                 <Button
@@ -61,10 +61,9 @@ const MovieCard = ({ movie, onClick }) => {
                         e.stopPropagation();
                         handleDislike();
                     }}
-                    className={`btn-like-icon ${liked === false ? "active" : ""}`}
-                    variant="ghost"
+                    variant="dislike"
+                    active={liked === false}
                 />
-
             </div>
         </div>
     );

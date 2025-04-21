@@ -1,0 +1,176 @@
+/* =========================
+   BASIS BUTTON STYLING
+========================= */
+.btn {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--main-contrast-color);
+    height: 3rem;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   VARIANTEN: DEFAULT, LOGIN, NAVBAR
+========================= */
+.landingLogin {
+    background-color: var(--signature-color);
+    width: 9.4rem;
+}
+
+.login {
+    background-color: var(--signature-color);
+}
+
+.register {
+    background-color: var(--signature-color);
+    border-radius: 0 15px 15px 0;
+}
+
+.navbar {
+    background-color: transparent;
+    border: 2px solid var(--main-contrast-color);
+    white-space: nowrap;
+}
+
+/* =========================
+   VARIANTEN: WATCHLIST, REVIEW
+========================= */
+.watchlist, .review {
+    background-color: transparent;
+    border: 2px solid var(--main-contrast-color);
+    font-size: 1rem;
+    padding: 0.3rem 0.6rem;
+    height: 2rem;
+    border-radius: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    transition: all 0.3s ease-in-out;
+    animation: none;
+}
+
+.watchlistActive {
+    background-color: var(--signature-color);
+    border-color: var(--signature-color);
+    animation: buttonPop 0.2s ease-in-out;
+}
+
+.watchlist img, .review img {
+    width: 1.4rem;
+    height: 1.4rem;
+    filter: invert(100%) brightness(200%) grayscale(100%);
+    transition: filter 0.3s ease-in-out;
+}
+
+.watchlistActive img {
+    filter: invert(100%) brightness(200%) grayscale(100%) drop-shadow(0px 0px 3px rgba(255, 255, 255, 0.5));
+}
+
+@keyframes buttonPop {
+    0% {transform: scale(1);}
+    40% {transform: scale(1.2);}
+    100% {transform: scale(1);}
+}
+
+/* =========================
+   VARIANT: LIKE / DISLIKE
+========================= */
+.like,
+.dislike {
+    background: transparent;
+    border: none;
+    padding: 0.3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    height: 2rem;
+    width: 2rem;
+}
+
+.like img,
+.dislike img {
+    width: 1.4rem;
+    height: 1.4rem;
+    filter: invert(100%) brightness(200%) grayscale(100%);
+    transition: filter 0.3s ease-in-out;
+}
+
+.likeActive,
+.dislikeActive {
+    animation: buttonPop 0.2s ease-in-out;
+}
+
+.likeActive img,
+.dislikeActive img {
+    filter: brightness(0) saturate(100%) invert(19%) sepia(98%) saturate(7487%) hue-rotate(242deg) brightness(104%) contrast(104%);
+}
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+========================= */
+@media (max-width: 768px) {
+    .btn {
+        height: 2.7rem;
+        font-size: 1.125rem;
+    }
+
+    .watchlist, .review {
+        font-size: 0.8rem;
+        padding: 0.1rem 0.4rem;
+        height: 1.8rem;
+    }
+
+    .watchlist img,
+    .review img,
+    .like img,
+    .dislike img {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .like,
+    .dislike {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        height: 2.4rem;
+        font-size: 1rem;
+    }
+
+    .watchlist, .review {
+        font-size: 0.6rem;
+        padding: 0 0.2rem;
+        height: 1.8rem;
+        gap: 0;
+    }
+
+    .watchlist img,
+    .review img {
+        height: 0.9rem;
+        width: 0.9rem;
+    }
+
+    .landingLogin {
+        width: 7rem;
+    }
+}
