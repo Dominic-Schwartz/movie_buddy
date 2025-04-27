@@ -1,0 +1,83 @@
+.authContainer {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.authLeft {
+    flex: 0 0 900px;
+    background-color: var(--main-background-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    color: var(--main-contrast-color);
+    padding: 2rem;
+}
+
+.authRight {
+    flex: 1 1 auto;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.85), transparent 50%),
+    url('../../assets/images/background-image-unauth.jpg') center/cover no-repeat;
+    min-height: 100vh;
+}
+
+.logoContainer {
+    display: flex;
+    height: 15%;
+    width: 90%;
+    justify-content: flex-start;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--signature-color);
+    text-decoration: none;
+    margin-bottom: 2rem;
+}
+
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 450px;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    padding-top: 2.2rem;
+    gap: 1.5rem;
+}
+
+.description {
+    font-size: 1rem;
+    color: var(--main-contrast-color);
+    max-width: 400px;
+}
+
+.quote {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    color: #ff3b3b;
+    border-left: 4px solid #ff3b3b;
+    padding-left: 1rem;
+    margin-top: 5rem;
+    font-style: italic;
+}
+
+.buttonWrapper {
+    margin-top: auto;
+    padding-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .authRight {
+        display: none;
+    }
+
+    .authLeft {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}

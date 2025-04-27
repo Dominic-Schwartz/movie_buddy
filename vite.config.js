@@ -6,12 +6,7 @@ export default defineConfig({
   plugins: [svgr({
     enforce: 'pre',
   }), react() ],
-  server: {
-    proxy: {
-      "/api": {
-        target: "https://api.datavortex.nl",
-        changeOrigin: true,
-      },
-    },
+  optimizeDeps: {
+    include: ['jwt-decode'],
   },
 });

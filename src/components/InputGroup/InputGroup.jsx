@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import InputField from "../InputField/InputField";
 import Button from "../Button/Button";
 import { isValidEmail } from "../../helpers/emailValidation";
-import ErrorPopup from "../ErrorPopup/ErrorPopup";
+import MessagePopup from "../MessagePopup/MessagePopup.jsx";
 import styles from "./InputGroup.module.css";
 
 const InputGroup = ({ placeholder, buttonText, onClick }) => {
@@ -50,7 +50,7 @@ const InputGroup = ({ placeholder, buttonText, onClick }) => {
                 />
             </div>
             {errorMessage && (
-                <ErrorPopup message={errorMessage} onClose={() => setErrorMessage("")} />
+                <MessagePopup message={errorMessage} onClose={() => setErrorMessage("")} />
             )}
         </>
     );

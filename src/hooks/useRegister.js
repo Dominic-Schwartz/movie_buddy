@@ -26,16 +26,21 @@ const useRegister = (initialEmail = "") => {
 
         setLoading(true);
 
-        const result = await registerUser(email, password);
+        const username = email.split("@")[0];
+        const result = await registerUser(email, password, username);
 
         setLoading(false);
 
         if (result.success) {
-            alert(result.message);
-            window.location.href = "/login";
+            setError("Registratie succesvol! Je wordt doorgestuurd...");
+            setTimeout(() => {
+                window.location.href = "/login";
+            }, 2000);
         } else {
             setError(result.message);
         }
+
+
     };
 
     return {

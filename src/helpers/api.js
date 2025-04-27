@@ -1,9 +1,10 @@
 import client from "../api/client.js";
 
-export async function registerUser(email, password) {
+export async function registerUser(email, password, username) {
+
     try {
         const response = await client.post("/api/auth/signup", {
-            username: email.split("@")[0],
+            username,
             email,
             password,
             role: ["user"],
