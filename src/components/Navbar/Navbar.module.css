@@ -71,6 +71,42 @@
     width: 100%;
 }
 
+.userWrapper {
+    position: relative;
+}
+
+.userMenu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    min-width: 200px;
+    background-color: var(--secondary-background-color);
+    border: 2px solid var(--main-contrast-color);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
+    animation: fadeSlideIn 0.3s ease forwards;
+    z-index: 1000;
+}
+
+.userMenu:hover {
+    border-color: var(--signature-color);
+}
+
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 @media (max-width: 925px) {
     .buttonGroup {
         display: none;

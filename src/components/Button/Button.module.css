@@ -24,7 +24,7 @@
 }
 
 /* =========================
-   VARIANTEN: DEFAULT, LOGIN, NAVBAR
+   VARIANTEN: LOGIN/REGISTER, NAVBAR
 ========================= */
 .landingLogin {
     background-color: var(--signature-color);
@@ -119,6 +119,26 @@
 .likeActive img,
 .dislikeActive img {
     filter: brightness(0) saturate(100%) invert(19%) sepia(98%) saturate(7487%) hue-rotate(242deg) brightness(104%) contrast(104%);
+}
+
+/* =========================
+   VARIANT: MENU
+========================= */
+.menu {
+    background-color: transparent;
+    border: none;
+    color: var(--main-contrast-color);
+    font-size: 1rem;
+    text-align: left;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.menu:hover {
+    background-color: var(--signature-color);
+    color: var(--main-background-color);
+    border-radius: 15px;
 }
 
 /* =========================

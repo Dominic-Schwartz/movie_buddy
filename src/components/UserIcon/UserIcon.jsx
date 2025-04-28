@@ -1,11 +1,20 @@
 import PropTypes from "prop-types";
-import "./UserIcon.css";
+import { useAvatar } from "../../hooks/useAvatar";
+import styles from "./UserIcon.module.css";
 import userIcon from "../../assets/svgs/user.svg";
 
 const UserIcon = ({ onClick }) => {
+    const avatarData = useAvatar() || {};
+    const { avatar } = avatarData;
+    const isCustomAvatar = Boolean(avatar);
+
     return (
-        <button type="button" className="user-icon-button" onClick={onClick}>
-            <img src={userIcon} alt="User Icon" />
+        <button type="button" className={styles.userIconButton} onClick={onClick}>
+            <img
+                src={avatar || userIcon}
+                alt="User Icon"
+                className={isCustomAvatar ? styles.avatarImage : styles.userIconImage}
+            />
         </button>
     );
 };
