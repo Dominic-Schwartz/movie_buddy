@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { fetchMoviesByQuery } from "../../helpers/fetchMovies";
 import styles from "./Navbar.module.css";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
-import UserIcon from "../UserIcon/UserIcon.jsx";
-import AvatarPicker from "../AvatarPicker/AvatarPicker.jsx";
+import UserIcon from "../UserIcon/UserIcon";
+import AvatarPicker from "../AvatarPicker/AvatarPicker";
 
 const Navbar = () => {
     const location = useLocation();
@@ -16,16 +17,14 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isPickerOpen, setIsPickerOpen] = useState(false);
+    const [suggestions, setSuggestions] = useState([]);
 
     const menuWrapperRef = useRef(null);
+    const searchWrapperRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
+            setIsScrolled(window.scrollY > 50);
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -40,16 +39,16 @@ const Navbar = () => {
                 setIsMenuOpen(false);
                 setIsPickerOpen(false);
             }
+            if (searchWrapperRef.current && !searchWrapperRef.current.contains(event.target)) {
+                setSuggestions([]);
+            }
         };
-        if (isMenuOpen || isPickerOpen) {
-            window.addEventListener("mousedown", handleClickOutside);
-        } else {
-            window.removeEventListener("mousedown", handleClickOutside);
-        }
+
+        window.addEventListener("mousedown", handleClickOutside);
         return () => {
             window.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [isMenuOpen, isPickerOpen]);
+    }, []);
 
     const handleLogoClick = () => {
         if (location.pathname === "/home") {
@@ -59,12 +58,28 @@ const Navbar = () => {
         }
     };
 
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
+    const handleSearchChange = async (e) => {
+        const value = e.target.value;
+        setSearchTerm(value);
+
+        if (value.trim().length >= 2) {
+            try {
+                const response = await fetchMoviesByQuery(value);
+                setSuggestions(response.slice(0, 5));
+            } catch (error) {
+                console.error("Error fetching suggestions:", error);
+                setSuggestions([]);
+            }
+        } else {
+            setSuggestions([]);
+        }
     };
 
     const handleSearch = () => {
-        console.log("Zoeken naar:", searchTerm);
+        if (searchTerm.trim()) {
+            setSuggestions([]); // sluit suggesties
+            navigate(`/search?query=${encodeURIComponent(searchTerm.trim())}`);
+        }
     };
 
     const handleUserIconClick = () => {
@@ -92,16 +107,38 @@ const Navbar = () => {
                 </div>
 
                 <div className={styles.navbarRight}>
-                    <div className={styles.searchWrapper}>
+                    <div ref={searchWrapperRef} className={styles.searchWrapper}>
                         <InputField
                             type="text"
                             placeholder="Zoeken"
                             value={searchTerm}
                             onChange={handleSearchChange}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    e.preventDefault();
+                                    handleSearch();
+                                }
+                            }}
                             className="search"
                             showSearchIcon
                             onSearchIconClick={handleSearch}
                         />
+                        {suggestions.length > 0 && (
+                            <div className={styles.suggestionsBox}>
+                                {suggestions.map((movie) => (
+                                    <div
+                                        key={movie.id}
+                                        className={styles.suggestionItem}
+                                        onClick={() => {
+                                            setSuggestions([]);
+                                            navigate(`/movie/${movie.id}`);
+                                        }}
+                                    >
+                                        {movie.title}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     <div ref={menuWrapperRef} className={styles.userWrapper}>
@@ -117,8 +154,6 @@ const Navbar = () => {
                             <AvatarPicker onClose={() => setIsPickerOpen(false)} />
                         )}
                     </div>
-
-
                 </div>
             </div>
         </nav>

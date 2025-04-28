@@ -18,6 +18,7 @@ function App() {
 
             <Route element={<ProtectedRoute requiredRoles={['ROLE_USER']} />}>
                 <Route path="/home" element={<HomePage />} />
+                <Route path="/search" element={<SearchResultsPage />} />
                 <Route path="/searchresults" element={<SearchResultsPage />} />
                 <Route path="/movie/:id" element={<MovieDetailPage />} />
             </Route>

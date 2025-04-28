@@ -87,13 +87,35 @@
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     animation: fadeSlideIn 0.3s ease forwards;
     z-index: 1000;
 }
 
 .userMenu:hover {
     border-color: var(--signature-color);
+}
+
+.suggestionsBox {
+    position: absolute;
+    background: #222;
+    border: 2px solid var(--main-contrast-color);
+    width: 300px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.suggestionItem {
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.suggestionItem:hover {
+    background-color: #333;
 }
 
 @keyframes fadeSlideIn {
