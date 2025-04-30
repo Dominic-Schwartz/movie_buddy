@@ -7,7 +7,7 @@ import MessagePopup from "../../components/MessagePopup/MessagePopup.jsx";
 import TermsPrivacyPopup from "../../components/TermsPrivacyPopup/TermsPrivacyPopup";
 import TermsCheckbox from "../../components/TermsCheckbox/TermsCheckbox";
 import useRegister from "../../hooks/useRegister";
-import "./RegisterPage.css";
+import styles from "./RegisterPage.module.css";
 
 const RegisterPage = () => {
     const location = useLocation();
@@ -36,16 +36,16 @@ const RegisterPage = () => {
     };
 
     return (
-        <form className="auth-container" onSubmit={handleRegister}>
+        <form className={styles.authContainer} onSubmit={handleRegister}>
             {error && <MessagePopup message={error} onClose={() => setError("")} />}
             {showPopup && <TermsPrivacyPopup isOpen={showPopup} onClose={() => setShowPopup(false)} contentType={popupContent} />}
 
-            <div className="auth-left">
-                <div className="logo-container">
-                    <p className="logo"><a href="/">MOVIE BUDDY</a></p>
+            <div className={styles.authLeft}>
+                <div className={styles.logoContainer}>
+                    <p className={styles.logo}><a href="/">MOVIE BUDDY</a></p>
                 </div>
 
-                <div className="register-container">
+                <div className={styles.registerContainer}>
                     <h2>Meld je gratis aan</h2>
 
                     <InputField
@@ -58,12 +58,15 @@ const RegisterPage = () => {
                         type="password"
                         placeholder="Wachtwoord"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)} showToggle />
+                        onChange={(e) => setPassword(e.target.value)}
+                        showToggle
+                    />
 
-                    {password.length > 0 &&
+                    {password.length > 0 && (
                         <PasswordStrengthIndicator
                             strength={passwordStrength}
-                        />}
+                        />
+                    )}
 
                     <TermsCheckbox
                         isAccepted={isAccepted}
@@ -79,11 +82,11 @@ const RegisterPage = () => {
                         disabled={loading}
                     />
 
-                    <p className="login-link">Heb je al een Movie Buddy account? <a href="/login">Dan kun je hier inloggen.</a></p>
+                    <p className={styles.loginLink}>Heb je al een Movie Buddy account? <a href="/login">Dan kun je hier inloggen.</a></p>
                 </div>
             </div>
 
-            <div className="auth-right"></div>
+            <div className={styles.authRight}></div>
         </form>
     );
 };

@@ -12,10 +12,18 @@ const SearchResultsPage = () => {
     const queryParams = new URLSearchParams(location.search);
     const query = queryParams.get("query");
     const genre = queryParams.get("genre");
+    const top = queryParams.get("top") === "true";
 
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
-    const searchTitle = query ? `Resultaten voor: '${query}'` : genre ? `Genre: ${genre}` : "Resultaten";
+
+    const searchTitle = query
+        ? `Resultaten voor: '${query}'`
+        : genre
+            ? top && genre.toLowerCase() === "trending"
+                ? "Top 10 Trending Films"
+                : `Genre: ${genre.charAt(0).toUpperCase() + genre.slice(1)}`
+            : "Resultaten";
 
     useEffect(() => {
         (async () => {
@@ -25,7 +33,15 @@ const SearchResultsPage = () => {
                 if (query) {
                     fetched = await fetchMoviesByQuery(query);
                 } else if (genre) {
-                    fetched = await fetchMoviesByGenreName(genre);
+                    if (genre.toLowerCase() === "trending") {
+                        if (top) {
+                            fetched = await fetchMoviesByGenreName(genre, 10); // ➔ Top 10 trending
+                        } else {
+                            fetched = await fetchMoviesByGenreName(genre, 24); // ➔ Bekijk alles trending
+                        }
+                    } else {
+                        fetched = await fetchMoviesByGenreName(genre); // ➔ Normale genres
+                    }
                 }
                 setMovies(Array.isArray(fetched) ? fetched : []);
             } catch (error) {
@@ -35,7 +51,7 @@ const SearchResultsPage = () => {
                 setLoading(false);
             }
         })();
-    }, [query, genre]);
+    }, [query, genre, top]);
 
     return (
         <div className={styles.searchResultsPage}>
@@ -51,6 +67,7 @@ const SearchResultsPage = () => {
                                 <MovieCard
                                     key={id}
                                     movie={{
+                                        id,
                                         poster: `https://image.tmdb.org/t/p/w500${poster_path}`,
                                         title,
                                     }}

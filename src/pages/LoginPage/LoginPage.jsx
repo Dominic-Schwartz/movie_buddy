@@ -13,6 +13,9 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const onClickForgotPassword = () => {
+        setError("Wachtwoord herstellen is momenteel niet beschikbaar.");
+    };
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -31,7 +34,6 @@ const LoginPage = () => {
             setError(result.message);
         }
     };
-
 
     return (
         <form className={styles.authContainer} onSubmit={handleLogin}>
@@ -62,9 +64,10 @@ const LoginPage = () => {
 
                     <Button text="Inloggen" variant="login" type="submit" />
 
-                    <p className={styles.forgotPassword}>
+                    <p className={styles.forgotPassword} onClick={onClickForgotPassword}>
                         Wachtwoord vergeten?
                     </p>
+
 
                     <p className={styles.registerLink}>
                         Nog geen Movie Buddy account? <a href="/register">Meld je dan hier aan.</a>

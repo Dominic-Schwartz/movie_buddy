@@ -3,17 +3,15 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import App from './App.jsx';
-import { AuthProvider } from './context/AuthProvider.jsx';
-import { AvatarProvider } from "./context/AvatarProvider.jsx";
+import { AppContextProvider } from "./context/AppContextProvider.jsx";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
     <StrictMode>
         <BrowserRouter>
-            <AuthProvider>
-                <AvatarProvider>
-                    <App />
-                </AvatarProvider>
-            </AuthProvider>
+            <AppContextProvider>
+                <App />
+            </AppContextProvider>
         </BrowserRouter>
     </StrictMode>
 );
+

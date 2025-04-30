@@ -1,0 +1,45 @@
+.terms {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.termsCheckbox input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid var(--main-contrast-color);
+    border-radius: 5px;
+    outline: none;
+    position: relative;
+}
+
+.termsCheckbox input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 8px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--main-contrast-color);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.userTermsLink,
+.privacyTermsLink {
+    cursor: pointer;
+    color: var(--main-contrast-color);
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.userTermsLink:hover,
+.privacyTermsLink:hover {
+    color: var(--signature-color);
+}

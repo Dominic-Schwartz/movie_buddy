@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
+import styles from "./TermsCheckbox.module.css";
 
 const TermsCheckbox = ({ isAccepted, setIsAccepted, openPopup }) => {
     return (
-        <div className="terms">
-            <div className="terms-checkbox">
+        <div className={styles.terms}>
+            <div className={styles.termsCheckbox}>
                 <input
                     type="checkbox"
                     id="terms"
@@ -11,15 +12,22 @@ const TermsCheckbox = ({ isAccepted, setIsAccepted, openPopup }) => {
                     onChange={(e) => setIsAccepted(e.target.checked)}
                 />
             </div>
-            <div className="terms-link">
-                <label>
-                    Ik ga akkoord met de { " " }
-                    <a onClick={() => openPopup("terms")} className="user-terms-link">
+            <div>
+                <label htmlFor="terms">
+                    Ik ga akkoord met de{" "}
+                    <span
+                        className={styles.userTermsLink}
+                        onClick={() => openPopup("terms")}
+                    >
                         Gebruikersvoorwaarden
-                    </a>{ " " } en { " " }
-                    <a onClick={() => openPopup("privacy")} className="privacy-terms-link">
+                    </span>{" "}
+                    en{" "}
+                    <span
+                        className={styles.privacyTermsLink}
+                        onClick={() => openPopup("privacy")}
+                    >
                         Privacyverklaring
-                    </a>
+                    </span>
                 </label>
             </div>
         </div>

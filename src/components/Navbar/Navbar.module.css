@@ -1,3 +1,6 @@
+/* =========================
+   BASIS NAVBAR STYLING
+========================= */
 .navbar {
     position: fixed;
     top: 0;
@@ -36,6 +39,9 @@
     flex-wrap: nowrap;
 }
 
+/* =========================
+   LOGO STYLING
+========================= */
 .logo {
     cursor: pointer;
     flex-shrink: 1;
@@ -44,6 +50,7 @@
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .logoText {
@@ -52,9 +59,18 @@
     color: var(--signature-color);
 }
 
+.logo:hover {
+    transform: scale(1.05);
+    color: #ffcc00;
+}
+
+/* =========================
+   NAVBAR ITEMS STYLING
+========================= */
 .buttonGroup {
     display: flex;
     align-items: center;
+    position: relative;
     gap: 1rem;
 }
 
@@ -98,14 +114,16 @@
 
 .suggestionsBox {
     position: absolute;
-    background: #222;
+    background: var(--secondary-background-color);
     border: 2px solid var(--main-contrast-color);
     width: 300px;
     max-height: 250px;
     overflow-y: auto;
     z-index: 1000;
-    border-radius: 8px;
+    border-radius: 15px;
     margin-top: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .suggestionItem {
@@ -115,7 +133,38 @@
 }
 
 .suggestionItem:hover {
-    background-color: #333;
+    background-color: var(--signature-color);
+}
+
+.genresDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--secondary-background-color);
+    border: 2px solid var(--main-contrast-color);
+    max-height: 300px;
+    overflow-y: auto;
+    width: 200px;
+    z-index: 1000;
+    margin-top: 8px;
+    border-radius: 15px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.genreItem {
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.genreItem:hover {
+    background-color: var(--signature-color);
+}
+
+.genresDropdown::-webkit-scrollbar,
+.suggestionsBox::-webkit-scrollbar {
+    display: none;
 }
 
 @keyframes fadeSlideIn {

@@ -6,6 +6,7 @@ import TrailerPlayer from "../../components/TrailerPlayer/TrailerPlayer";
 import Button from "../../components/Button/Button";
 import CastCardRow from "../../components/CastCardRow/CastCardRow";
 import ReviewCardCarousel from "../../components/ReviewCardCarousel/ReviewCardCarousel";
+import { useWatchlist } from "../../hooks/useWatchlist"; // toegevoegd!
 
 import PlusIcon from "../../assets/svgs/plus.svg";
 import MinIcon from "../../assets/svgs/minus.svg";
@@ -18,12 +19,13 @@ import { useMovieDetails } from "../../hooks/useMovieDetails";
 
 const MovieDetailPage = () => {
     const { id } = useParams();
-    const [isInWatchlist, setIsInWatchlist] = useState(false);
+    const { movie, credits, ageRating } = useMovieDetails(id);
+    const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist(); // toegevoegd!
     const [liked, setLiked] = useState(null);
     const [likePercentage] = useState(98);
     const [dislikePercentage] = useState(2);
 
-    const { movie, credits, ageRating } = useMovieDetails(id);
+    const isMovieInWatchlist = isInWatchlist(parseInt(id)); // Let op: parseInt!
 
     const getCrewMembers = (job) =>
         credits?.crew
@@ -37,10 +39,19 @@ const MovieDetailPage = () => {
         }
         : {};
 
-    // Handlers voor de actieknoppen
     const handleWatchlistToggle = (e) => {
         e.stopPropagation();
-        setIsInWatchlist(!isInWatchlist);
+        if (isMovieInWatchlist) {
+            removeFromWatchlist(parseInt(id));
+        } else {
+            if (movie) {
+                addToWatchlist({
+                    id: parseInt(id),
+                    title: movie.title,
+                    poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+                });
+            }
+        }
     };
 
     const handleLike = (e) => {
@@ -55,7 +66,6 @@ const MovieDetailPage = () => {
 
     const handleReview = (e) => {
         e.stopPropagation();
-        // Hier komt logica voor het plaatsen van een review
         console.log("Review button clicked!");
     };
 
@@ -93,10 +103,7 @@ const MovieDetailPage = () => {
     return (
         <>
             {movie?.backdrop_path && (
-                <div
-                    className={styles.backdropFixed}
-                    style={backgroundImageStyle}
-                />
+                <div className={styles.backdropFixed} style={backgroundImageStyle} />
             )}
             <div className={styles.movieDetailPage}>
                 <Navbar />
@@ -105,21 +112,16 @@ const MovieDetailPage = () => {
                         <div className={styles.movieDetailContent}>
                             <div className={styles.trailerGroup}>
                                 <div className={styles.trailerPlaceholder}>
-                                    <TrailerPlayer
-                                        movieId={parseInt(id)}
-                                        title={movie.title}
-                                    />
+                                    <TrailerPlayer movieId={parseInt(id)} title={movie.title} />
                                 </div>
                                 <div className={styles.actionsContainer}>
                                     <Button
                                         text="watchlist"
-                                        icon={
-                                            isInWatchlist ? MinIcon : PlusIcon
-                                        }
+                                        icon={isMovieInWatchlist ? MinIcon : PlusIcon}
                                         iconPosition="left"
                                         onClick={handleWatchlistToggle}
                                         variant="watchlist"
-                                        active={isInWatchlist}
+                                        active={isMovieInWatchlist}
                                     />
 
                                     <Button
@@ -158,8 +160,7 @@ const MovieDetailPage = () => {
 
                             <div className={styles.movieInfo}>
                                 <h1>
-                                    {movie.title} (
-                                    {new Date(movie?.release_date).getFullYear()})
+                                    {movie.title} ({new Date(movie?.release_date).getFullYear()})
                                 </h1>
                                 <p className={styles.movieMeta}>
                                     pg-{ageRating} &nbsp;•&nbsp; {movie?.production_companies?.[0]?.name} &nbsp;•&nbsp; {movie?.runtime}m
@@ -180,17 +181,13 @@ const MovieDetailPage = () => {
                                 {credits && (
                                     <div className={styles.crewContainer}>
                                         <p className={styles.crewLine}>
-                                            <strong>Regie:</strong>{" "}
-                                            {getCrewMembers("Director")}
+                                            <strong>Regie:</strong> {getCrewMembers("Director")}
                                         </p>
                                         <p className={styles.crewLine}>
-                                            <strong>Scenario:</strong>{" "}
-                                            {getCrewMembers("Writer") ||
-                                                getCrewMembers("Screenplay")}
+                                            <strong>Scenario:</strong> {getCrewMembers("Writer") || getCrewMembers("Screenplay")}
                                         </p>
                                         <p className={styles.crewLine}>
-                                            <strong>Producent:</strong>{" "}
-                                            {getCrewMembers("Producer")}
+                                            <strong>Producent:</strong> {getCrewMembers("Producer")}
                                         </p>
                                     </div>
                                 )}
@@ -200,11 +197,8 @@ const MovieDetailPage = () => {
                         <p>Filmgegevens worden geladen...</p>
                     )}
                     {credits?.cast && <CastCardRow cast={credits.cast} />}
-
                     <ReviewCardCarousel reviews={dummyReviews} />
-
                 </main>
-
                 <Footer />
             </div>
         </>

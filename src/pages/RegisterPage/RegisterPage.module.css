@@ -1,10 +1,10 @@
-.auth-container {
+.authContainer {
     display: flex;
     min-height: 100vh;
     width: 100vw;
 }
 
-.auth-left {
+.authLeft {
     flex: 0 0 900px;
     background-color: var(--main-background-color);
     display: flex;
@@ -16,14 +16,14 @@
     padding: 2rem;
 }
 
-.auth-right {
+.authRight {
     flex: 1 1 auto;
     background: linear-gradient(to right, rgba(0, 0, 0, 0.85), transparent 50%),
-    url('../../assets/images/background-image-auth.jpg') center/cover no-repeat;
+    url("../../assets/images/background-image-auth.jpg") center/cover no-repeat;
     min-height: 100vh;
 }
 
-.logo-container {
+.logoContainer {
     display: flex;
     height: 15%;
     width: 90%;
@@ -38,7 +38,7 @@
     margin-bottom: 2rem;
 }
 
-.register-container {
+.registerContainer {
     display: flex;
     flex-direction: column;
     max-width: 450px;
@@ -49,78 +49,34 @@
     gap: 2.5rem;
 }
 
-.register-container h2 {
+.registerContainer h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
 
-.terms {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    font-size: 0.9rem;
-    text-align: left;
-}
-
-.terms input[type="checkbox"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    background-color: transparent;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    outline: none;
-    position: relative;
-}
-
-.terms input[type="checkbox"]:checked::after {
-    content: "";
-    position: absolute;
-    top: 3px;
-    left: 8px;
-    width: 5px;
-    height: 10px;
-    border: solid #fff;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
-.user-terms-link, .privacy-terms-link {
-    cursor: pointer;
-    color: var(--main-contrast-color);
-    text-decoration: none;
-    transition: color 0.3s ease-in-out;
-}
-
-.user-terms-link:hover, .privacy-terms-link:hover {
-    color: var(--signature-color);
-}
-
-.login-link {
+.loginLink {
     margin-top: 1rem;
     font-size: 0.9rem;
     text-align: left;
 }
 
-.login-link a {
+.loginLink a {
     color: var(--main-contrast-color);
     font-weight: bold;
     text-decoration: none;
     transition: color 0.3s ease-in-out;
 }
 
-.login-link a:hover {
+.loginLink a:hover {
     color: var(--signature-color);
 }
 
 @media (max-width: 768px) {
-    .auth-right {
+    .authRight {
         display: none;
     }
 
-    .auth-left {
+    .authLeft {
         flex: 1 1 auto;
         width: 100%;
     }

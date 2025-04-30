@@ -7,6 +7,7 @@ import SearchResultsPage from './pages/SearchResultsPage/SearchResultsPage';
 import MovieDetailPage from './pages/MovieDetailPage/MovieDetailPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import UnauthorizedPage from './pages/UnauthorizedPage/UnauthorizedPage';
+import WatchlistPage from "./pages/WatchlistPage/WatchlistPage.jsx";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/search" element={<SearchResultsPage />} />
                 <Route path="/searchresults" element={<SearchResultsPage />} />
+                <Route path="/watchlist" element={<WatchlistPage />} />
                 <Route path="/movie/:id" element={<MovieDetailPage />} />
             </Route>
 

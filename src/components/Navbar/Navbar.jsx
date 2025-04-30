@@ -7,6 +7,7 @@ import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
 import UserIcon from "../UserIcon/UserIcon";
 import AvatarPicker from "../AvatarPicker/AvatarPicker";
+import { GENRE_IDS } from "../../constants/urls";
 
 const Navbar = () => {
     const location = useLocation();
@@ -17,10 +18,12 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isPickerOpen, setIsPickerOpen] = useState(false);
+    const [isGenresOpen, setIsGenresOpen] = useState(false);
     const [suggestions, setSuggestions] = useState([]);
 
     const menuWrapperRef = useRef(null);
     const searchWrapperRef = useRef(null);
+    const genresWrapperRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -42,9 +45,13 @@ const Navbar = () => {
             if (searchWrapperRef.current && !searchWrapperRef.current.contains(event.target)) {
                 setSuggestions([]);
             }
+            if (genresWrapperRef.current && !genresWrapperRef.current.contains(event.target)) {
+                setIsGenresOpen(false);
+            }
         };
 
         window.addEventListener("mousedown", handleClickOutside);
+
         return () => {
             window.removeEventListener("mousedown", handleClickOutside);
         };
@@ -100,9 +107,38 @@ const Navbar = () => {
                     </div>
 
                     <div className={styles.buttonGroup}>
-                        <Button text="Genres" variant="navbar" onClick={() => console.log("Genres")} />
-                        <Button text="TOP 10" variant="navbar" onClick={() => console.log("TOP 10")} />
-                        <Button text="Watchlist" variant="navbar" onClick={() => console.log("Watchlist")} />
+
+                        <div ref={genresWrapperRef} className={styles.buttonGroup}>
+                            <Button
+                                text="Genres"
+                                variant="navbar"
+                                onClick={() => setIsGenresOpen(prev => !prev)}
+                            />
+                            {isGenresOpen && (
+                                <div className={styles.genresDropdown}>
+                                    {Object.keys(GENRE_IDS).map((genreName) => (
+                                        <div
+                                            key={genreName}
+                                            className={styles.genreItem}
+                                            onClick={() => {
+                                                setIsGenresOpen(false);
+                                                navigate(`/search?genre=${encodeURIComponent(genreName)}`);
+                                            }}
+                                        >
+                                            {genreName.charAt(0).toUpperCase() + genreName.slice(1)}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        <Button
+                            text="TOP 10"
+                            variant="navbar"
+                            onClick={() => navigate("/search?genre=trending&top=true")}
+                        />
+
+                        <Button text="Watchlist" variant="navbar" onClick={() => navigate("/watchlist")} />
                     </div>
                 </div>
 

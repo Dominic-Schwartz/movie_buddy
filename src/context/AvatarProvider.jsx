@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-import { AvatarContext } from "./AvatarContext";
+import { AvatarContext } from "./AvatarContext.js";
 import { useAuth } from "../hooks/useAuth";
 
 export function AvatarProvider({ children }) {
