@@ -5,27 +5,28 @@ import { useAuth } from "../hooks/useAuth";
 
 export function AvatarProvider({ children }) {
     const { user } = useAuth();
+    const username = user?.username;
     const [avatar, setAvatar] = useState(null);
 
     useEffect(() => {
-        if (user?.id) {
-            const storedAvatar = localStorage.getItem(`avatar-${user.id}`);
+        if (username) {
+            const storedAvatar = localStorage.getItem(`avatar_${username}`);
             if (storedAvatar) {
                 setAvatar(storedAvatar);
             }
         }
-    }, [user?.id]);
+    }, [username]);
 
     const chooseAvatar = (avatarUrl) => {
-        if (user?.id) {
-            localStorage.setItem(`avatar-${user.id}`, avatarUrl);
+        if (username) {
+            localStorage.setItem(`avatar_${username}`, avatarUrl);
             setAvatar(avatarUrl);
         }
     };
 
     const removeAvatar = () => {
-        if (user?.id) {
-            localStorage.removeItem(`avatar-${user.id}`);
+        if (username) {
+            localStorage.removeItem(`avatar_${username}`);
             setAvatar(null);
         }
     };

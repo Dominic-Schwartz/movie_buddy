@@ -1,20 +1,29 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { WatchlistContext } from "./WatchlistContext";
+import { useAuth } from "../hooks/useAuth";
 
 export const WatchlistProvider = ({ children }) => {
     const [watchlist, setWatchlist] = useState([]);
+    const { user } = useAuth();
+    const username = user?.username;
 
     useEffect(() => {
-        const storedWatchlist = localStorage.getItem("watchlist");
-        if (storedWatchlist) {
-            setWatchlist(JSON.parse(storedWatchlist));
+        if (username) {
+            const stored = localStorage.getItem(`watchlist_${username}`);
+            if (stored) {
+                setWatchlist(JSON.parse(stored));
+            } else {
+                setWatchlist([]);
+            }
         }
-    }, []);
+    }, [username]);
 
     useEffect(() => {
-        localStorage.setItem("watchlist", JSON.stringify(watchlist));
-    }, [watchlist]);
+        if (username) {
+            localStorage.setItem(`watchlist_${username}`, JSON.stringify(watchlist));
+        }
+    }, [watchlist, username]);
 
     const addToWatchlist = (movie) => {
         if (!watchlist.find((m) => m.id === movie.id)) {

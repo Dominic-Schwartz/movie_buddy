@@ -1,12 +1,13 @@
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import TrailerPlayer from "../../components/TrailerPlayer/TrailerPlayer";
 import Button from "../../components/Button/Button";
 import CastCardRow from "../../components/CastCardRow/CastCardRow";
 import ReviewCardCarousel from "../../components/ReviewCardCarousel/ReviewCardCarousel";
-import { useWatchlist } from "../../hooks/useWatchlist"; // toegevoegd!
+import LikeDislikeStats from "../../components/LikeDislikeStats/LikeDislikeStats";
+import { useWatchlist } from "../../hooks/useWatchlist";
 
 import PlusIcon from "../../assets/svgs/plus.svg";
 import MinIcon from "../../assets/svgs/minus.svg";
@@ -16,16 +17,22 @@ import BubbleIcon from "../../assets/svgs/bubble.svg";
 import styles from "./MovieDetailPage.module.css";
 
 import { useMovieDetails } from "../../hooks/useMovieDetails";
+import { useLikes } from "../../hooks/useLikes";
 
 const MovieDetailPage = () => {
     const { id } = useParams();
     const { movie, credits, ageRating } = useMovieDetails(id);
-    const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist(); // toegevoegd!
-    const [liked, setLiked] = useState(null);
-    const [likePercentage] = useState(98);
-    const [dislikePercentage] = useState(2);
+    const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
+    const { likeMovie, dislikeMovie, removeReaction, getReaction } = useLikes();
+    const userReaction = getReaction(parseInt(id));
+    const { getAggregatedStats } = useLikes();
+    const stats = useMemo(() => {
+        return getAggregatedStats(parseInt(id));
+    }, [getAggregatedStats, id]);
+    const likePercentage = stats.likePercentage;
+    const dislikePercentage = stats.dislikePercentage;
 
-    const isMovieInWatchlist = isInWatchlist(parseInt(id)); // Let op: parseInt!
+    const isMovieInWatchlist = isInWatchlist(parseInt(id));
 
     const getCrewMembers = (job) =>
         credits?.crew
@@ -56,12 +63,21 @@ const MovieDetailPage = () => {
 
     const handleLike = (e) => {
         e.stopPropagation();
-        setLiked(liked === true ? null : true);
+        console.log("liked!");
+        if (userReaction === "like") {
+            removeReaction(parseInt(id));
+        } else {
+            likeMovie(parseInt(id));
+        }
     };
 
     const handleDislike = (e) => {
         e.stopPropagation();
-        setLiked(liked === false ? null : false);
+        if (userReaction === "dislike") {
+            removeReaction(parseInt(id));
+        } else {
+            dislikeMovie(parseInt(id));
+        }
     };
 
     const handleReview = (e) => {
@@ -134,24 +150,24 @@ const MovieDetailPage = () => {
 
                                     <div className={styles.likeDislikeContainer}>
                                         <div className={styles.likeGroup}>
-                                            <span className={styles.likePercentage}>{likePercentage}%</span>
+                                            <LikeDislikeStats percentage={likePercentage} type="likes" />
                                             <Button
                                                 icon={ThumbsUpIcon}
                                                 iconPosition="left"
                                                 onClick={handleLike}
                                                 variant="like"
-                                                active={liked === true}
+                                                active={userReaction === "like"}
                                             />
                                         </div>
 
                                         <div className={styles.dislikeGroup}>
-                                            <span className={styles.dislikePercentage}>{dislikePercentage}%</span>
+                                            <LikeDislikeStats percentage={dislikePercentage} type="dislikes" />
                                             <Button
                                                 icon={ThumbsDownIcon}
                                                 iconPosition="left"
                                                 onClick={handleDislike}
                                                 variant="dislike"
-                                                active={liked === false}
+                                                active={userReaction === "dislike"}
                                             />
                                         </div>
                                     </div>

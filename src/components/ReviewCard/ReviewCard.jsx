@@ -10,13 +10,18 @@ const ReviewCard = ({
                         date,
                         reaction,
                         onShowAll,
+                        avatar
                     }) => {
     const ReactionIcon = reaction === "like" ? ThumbsUpIcon : ThumbsDownIcon;
 
     return (
         <div className={styles.reviewCard}>
             <header className={styles.header}>
-                <UserIcon />
+                {avatar ? (
+                    <img src={avatar} alt="avatar" className={styles.avatarImg} />
+                ) : (
+                    <UserIcon />
+                )}
                 <span className={styles.username}>{username}</span>
             </header>
 
@@ -38,6 +43,7 @@ const ReviewCard = ({
 };
 
 ReviewCard.propTypes = {
+    avatar: PropTypes.string,
     username: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,

@@ -31,6 +31,7 @@ export function AuthProvider({ children }) {
             setUser({
                 id,
                 email,
+                username,
                 roles,
                 expiresAt: Date.now() + (60 * 60 * 1000),
             });

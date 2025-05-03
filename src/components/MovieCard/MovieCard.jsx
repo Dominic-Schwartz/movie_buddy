@@ -1,18 +1,19 @@
 import PropTypes from "prop-types";
 import { useWatchlist } from "../../hooks/useWatchlist";
-import { useState } from "react";
 import styles from "./MovieCard.module.css";
 import Button from "../Button/Button";
 import PlusIcon from "../../assets/svgs/plus.svg";
 import MinIcon from "../../assets/svgs/minus.svg";
 import ThumbsUpIcon from "../../assets/svgs/thumbs-up.svg";
 import ThumbsDownIcon from "../../assets/svgs/thumbs-down.svg";
+import { useLikes } from "../../hooks/useLikes";
 
 const MovieCard = ({ movie, onClick }) => {
     const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
     const isMovieInWatchlist = isInWatchlist(movie.id);
 
-    const [liked, setLiked] = useState(null);
+    const { likeMovie, dislikeMovie, removeReaction, getReaction } = useLikes();
+    const userReaction = getReaction(movie.id);
 
     const handleWatchlistToggle = (e) => {
         e.stopPropagation();
@@ -25,12 +26,20 @@ const MovieCard = ({ movie, onClick }) => {
 
     const handleLike = (e) => {
         e.stopPropagation();
-        setLiked(liked === true ? null : true);
+        if (userReaction === "like") {
+            removeReaction(movie.id);
+        } else {
+            likeMovie(movie.id);
+        }
     };
 
     const handleDislike = (e) => {
         e.stopPropagation();
-        setLiked(liked === false ? null : false);
+        if (userReaction === "dislike") {
+            removeReaction(movie.id);
+        } else {
+            dislikeMovie(movie.id);
+        }
     };
 
     return (
@@ -54,14 +63,14 @@ const MovieCard = ({ movie, onClick }) => {
                     iconPosition="left"
                     onClick={handleLike}
                     variant="like"
-                    active={liked === true}
+                    active={userReaction === "like"}
                 />
                 <Button
                     icon={ThumbsDownIcon}
                     iconPosition="left"
                     onClick={handleDislike}
                     variant="dislike"
-                    active={liked === false}
+                    active={userReaction === "dislike"}
                 />
             </div>
         </div>
