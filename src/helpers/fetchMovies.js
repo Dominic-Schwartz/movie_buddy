@@ -98,3 +98,22 @@ export const fetchMoviesByQuery = async (query) => {
     }
 };
 
+export const fetchSearchResults = async ({ query, genre, isTop }) => {
+    try {
+        if (query) return await fetchMoviesByQuery(query);
+
+        if (genre) {
+            const lower = genre.toLowerCase();
+            if (lower === "trending") {
+                return await fetchTrendingMovies(isTop ? 10 : 24);
+            } else {
+                return await fetchMoviesByGenreName(genre);
+            }
+        }
+
+        return [];
+    } catch (error) {
+        console.error("Error fetching search results:", error.message);
+        return [];
+    }
+};

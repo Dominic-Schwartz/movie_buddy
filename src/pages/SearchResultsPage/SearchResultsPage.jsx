@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import MovieCard from "../../components/MovieCard/MovieCard";
-import { fetchMoviesByGenreName, fetchMoviesByQuery } from "../../helpers/fetchMovies";
+import { fetchSearchResults } from "../../helpers/fetchMovies"; // <-- nieuwe helper
 import styles from "./SearchResultsPage.module.css";
 
 const SearchResultsPage = () => {
@@ -26,31 +26,14 @@ const SearchResultsPage = () => {
             : "Resultaten";
 
     useEffect(() => {
-        (async () => {
-            setLoading(true);
-            try {
-                let fetched = [];
-                if (query) {
-                    fetched = await fetchMoviesByQuery(query);
-                } else if (genre) {
-                    if (genre.toLowerCase() === "trending") {
-                        if (top) {
-                            fetched = await fetchMoviesByGenreName(genre, 10); // ➔ Top 10 trending
-                        } else {
-                            fetched = await fetchMoviesByGenreName(genre, 24); // ➔ Bekijk alles trending
-                        }
-                    } else {
-                        fetched = await fetchMoviesByGenreName(genre); // ➔ Normale genres
-                    }
-                }
-                setMovies(Array.isArray(fetched) ? fetched : []);
-            } catch (error) {
-                console.error(error);
+        setLoading(true);
+        fetchSearchResults({ query, genre, top })
+            .then((fetched) => setMovies(Array.isArray(fetched) ? fetched : []))
+            .catch((error) => {
+                console.error("❌ Fout bij ophalen resultaten:", error);
                 setMovies([]);
-            } finally {
-                setLoading(false);
-            }
-        })();
+            })
+            .finally(() => setLoading(false));
     }, [query, genre, top]);
 
     return (

@@ -8,7 +8,7 @@ import CastCardRow from "../../components/CastCardRow/CastCardRow";
 import ReviewCardCarousel from "../../components/ReviewCardCarousel/ReviewCardCarousel";
 import LikeDislikeStats from "../../components/LikeDislikeStats/LikeDislikeStats";
 import ReviewForm from "../../components/ReviewForm/ReviewForm.jsx";
-import { useWatchlist } from "../../hooks/useWatchlist";
+import { useWatchlistToggle } from "../../hooks/useWatchlistToggle";
 import { useReviews } from "../../hooks/useReviews";
 
 import PlusIcon from "../../assets/svgs/plus.svg";
@@ -23,26 +23,26 @@ import { useLikes } from "../../hooks/useLikes";
 
 const MovieDetailPage = () => {
     const { id } = useParams();
-    const { reviews, userHasReviewed, submitReview } = useReviews(parseInt(id));
+    const movieId = parseInt(id);
+    const { movie, credits, ageRating } = useMovieDetails(movieId);
+    const { reviews, userHasReviewed, submitReview } = useReviews(movieId);
     const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
-    const { movie, credits, ageRating } = useMovieDetails(id);
-    const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
-    const { likeMovie, dislikeMovie, removeReaction, getReaction } = useLikes();
-    const userReaction = getReaction(parseInt(id));
-    const { getAggregatedStats } = useLikes();
-    const stats = useMemo(() => {
-        return getAggregatedStats(parseInt(id));
-    }, [getAggregatedStats, id]);
+
+    const { isActive: isMovieInWatchlist, toggleWatchlist } = useWatchlistToggle({
+        id: movieId,
+        title: movie?.title,
+        poster: movie?.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "",
+    });
+
+    const { likeMovie, dislikeMovie, removeReaction, getReaction, getAggregatedStats } = useLikes();
+    const userReaction = getReaction(movieId);
+
+    const stats = useMemo(() => getAggregatedStats(movieId), [getAggregatedStats, movieId]);
     const likePercentage = stats.likePercentage;
     const dislikePercentage = stats.dislikePercentage;
 
-    const isMovieInWatchlist = isInWatchlist(parseInt(id));
-
     const getCrewMembers = (job) =>
-        credits?.crew
-            ?.filter((member) => member?.job === job)
-            .map((m) => m.name)
-            .join(", ");
+        credits?.crew?.filter((m) => m?.job === job).map((m) => m.name).join(", ");
 
     const backgroundImageStyle = movie?.backdrop_path
         ? {
@@ -50,44 +50,19 @@ const MovieDetailPage = () => {
         }
         : {};
 
-    const handleWatchlistToggle = (e) => {
-        e.stopPropagation();
-        if (isMovieInWatchlist) {
-            removeFromWatchlist(parseInt(id));
-        } else {
-            if (movie) {
-                addToWatchlist({
-                    id: parseInt(id),
-                    title: movie.title,
-                    poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-                });
-            }
-        }
-    };
-
     const handleLike = (e) => {
         e.stopPropagation();
-        if (userReaction === "like") {
-            removeReaction(parseInt(id));
-        } else {
-            likeMovie(parseInt(id));
-        }
+        userReaction === "like" ? removeReaction(movieId) : likeMovie(movieId);
     };
 
     const handleDislike = (e) => {
         e.stopPropagation();
-        if (userReaction === "dislike") {
-            removeReaction(parseInt(id));
-        } else {
-            dislikeMovie(parseInt(id));
-        }
+        userReaction === "dislike" ? removeReaction(movieId) : dislikeMovie(movieId);
     };
 
     return (
         <>
-            {movie?.backdrop_path && (
-                <div className={styles.backdropFixed} style={backgroundImageStyle} />
-            )}
+            {movie?.backdrop_path && <div className={styles.backdropFixed} style={backgroundImageStyle} />}
             <div className={styles.movieDetailPage}>
                 <Navbar />
                 <main className={styles.detailContainer}>
@@ -95,14 +70,17 @@ const MovieDetailPage = () => {
                         <div className={styles.movieDetailContent}>
                             <div className={styles.trailerGroup}>
                                 <div className={styles.trailerPlaceholder}>
-                                    <TrailerPlayer movieId={parseInt(id)} title={movie.title} />
+                                    <TrailerPlayer movieId={movieId} title={movie.title} />
                                 </div>
                                 <div className={styles.actionsContainer}>
                                     <Button
                                         text="watchlist"
                                         icon={isMovieInWatchlist ? MinIcon : PlusIcon}
                                         iconPosition="left"
-                                        onClick={handleWatchlistToggle}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleWatchlist();
+                                        }}
                                         variant="watchlist"
                                         active={isMovieInWatchlist}
                                     />
@@ -160,9 +138,7 @@ const MovieDetailPage = () => {
                                     pg-{ageRating} &nbsp;•&nbsp; {movie?.production_companies?.[0]?.name} &nbsp;•&nbsp; {movie?.runtime}m
                                 </p>
 
-                                <p className={styles.movieSummary}>
-                                    {movie.overview}
-                                </p>
+                                <p className={styles.movieSummary}>{movie.overview}</p>
 
                                 {movie?.genres && (
                                     <ul className={styles.genreList}>
@@ -191,7 +167,6 @@ const MovieDetailPage = () => {
                         <p>Filmgegevens worden geladen...</p>
                     )}
                     {credits?.cast && <CastCardRow cast={credits.cast} />}
-
                     <ReviewCardCarousel reviews={reviews} />
                 </main>
                 <Footer />

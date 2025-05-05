@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { useWatchlist } from "../../hooks/useWatchlist";
 import styles from "./MovieCard.module.css";
 import Button from "../Button/Button";
 import PlusIcon from "../../assets/svgs/plus.svg";
@@ -7,22 +6,13 @@ import MinIcon from "../../assets/svgs/minus.svg";
 import ThumbsUpIcon from "../../assets/svgs/thumbs-up.svg";
 import ThumbsDownIcon from "../../assets/svgs/thumbs-down.svg";
 import { useLikes } from "../../hooks/useLikes";
+import { useWatchlistToggle } from "../../hooks/useWatchlistToggle";
 
 const MovieCard = ({ movie, onClick }) => {
-    const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
-    const isMovieInWatchlist = isInWatchlist(movie.id);
+    const { isInWatchlist, handleWatchlistToggle } = useWatchlistToggle(movie);
 
     const { likeMovie, dislikeMovie, removeReaction, getReaction } = useLikes();
     const userReaction = getReaction(movie.id);
-
-    const handleWatchlistToggle = (e) => {
-        e.stopPropagation();
-        if (isMovieInWatchlist) {
-            removeFromWatchlist(movie.id);
-        } else {
-            addToWatchlist(movie);
-        }
-    };
 
     const handleLike = (e) => {
         e.stopPropagation();
@@ -52,11 +42,11 @@ const MovieCard = ({ movie, onClick }) => {
             <div className={styles.movieActions}>
                 <Button
                     text="watchlist"
-                    icon={isMovieInWatchlist ? MinIcon : PlusIcon}
+                    icon={isInWatchlist ? MinIcon : PlusIcon}
                     iconPosition="left"
                     onClick={handleWatchlistToggle}
                     variant="watchlist"
-                    active={isMovieInWatchlist}
+                    active={isInWatchlist}
                 />
                 <Button
                     icon={ThumbsUpIcon}

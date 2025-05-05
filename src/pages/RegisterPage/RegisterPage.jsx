@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import InputField from "../../components/InputField/InputField";
 import PasswordStrengthIndicator from "../../components/PasswordStrengthIndicator/PasswordStrengthIndicator";
@@ -27,22 +27,32 @@ const RegisterPage = () => {
         passwordStrength
     } = useRegister(prefillEmail);
 
-    const [showPopup, setShowPopup] = useState(false);
-    const [popupContent, setPopupContent] = useState("");
+    const [popup, setPopup] = useState({ open: false, content: "" });
 
     const openPopup = (type) => {
-        setPopupContent(type);
-        setShowPopup(true);
+        setPopup({ open: true, content: type });
+    };
+
+    const closePopup = () => {
+        setPopup({ open: false, content: "" });
     };
 
     return (
         <form className={styles.authContainer} onSubmit={handleRegister}>
             {error && <MessagePopup message={error} onClose={() => setError("")} />}
-            {showPopup && <TermsPrivacyPopup isOpen={showPopup} onClose={() => setShowPopup(false)} contentType={popupContent} />}
+            {popup.open && (
+                <TermsPrivacyPopup
+                    isOpen={popup.open}
+                    onClose={closePopup}
+                    contentType={popup.content}
+                />
+            )}
 
             <div className={styles.authLeft}>
                 <div className={styles.logoContainer}>
-                    <p className={styles.logo}><a href="/">MOVIE BUDDY</a></p>
+                    <p className={styles.logo}>
+                        <Link to="/">MOVIE BUDDY</Link>
+                    </p>
                 </div>
 
                 <div className={styles.registerContainer}>
@@ -63,9 +73,7 @@ const RegisterPage = () => {
                     />
 
                     {password.length > 0 && (
-                        <PasswordStrengthIndicator
-                            strength={passwordStrength}
-                        />
+                        <PasswordStrengthIndicator strength={passwordStrength} />
                     )}
 
                     <TermsCheckbox
@@ -78,11 +86,13 @@ const RegisterPage = () => {
                         text={loading ? "Bezig met registreren..." : "Aanmelden"}
                         variant="login"
                         type="submit"
-                        onClick={handleRegister}
                         disabled={loading}
                     />
 
-                    <p className={styles.loginLink}>Heb je al een Movie Buddy account? <a href="/login">Dan kun je hier inloggen.</a></p>
+                    <p className={styles.loginLink}>
+                        Heb je al een Movie Buddy account?{" "}
+                        <Link to="/login">Dan kun je hier inloggen.</Link>
+                    </p>
                 </div>
             </div>
 

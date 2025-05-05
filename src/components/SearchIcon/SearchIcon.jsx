@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import "./SearchIcon.css";
+import styles from "./SearchIcon.module.css";
 import searchIcon from "../../assets/svgs/search.svg";
 
 const SearchIcon = ({ onClick }) => {
     return (
-        <button type="button" className="search-icon-button" onClick={onClick}>
+        <button type="button" className={styles.searchIconButton} onClick={onClick}>
             <img src={searchIcon} alt="Search icon" />
         </button>
     );
