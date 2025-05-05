@@ -3,6 +3,7 @@ import { AuthProvider } from "./AuthProvider";
 import { AvatarProvider } from "./AvatarProvider";
 import { WatchlistProvider } from "./WatchlistProvider";
 import { LikesProvider } from "./LikesProvider";
+import {ReviewProvider} from "./ReviewProvider.jsx";
 
 export const AppContextProvider = ({ children }) => {
     return (
@@ -10,7 +11,9 @@ export const AppContextProvider = ({ children }) => {
             <AvatarProvider>
                 <WatchlistProvider>
                     <LikesProvider>
-                        {children}
+                        <ReviewProvider>
+                            {children}
+                        </ReviewProvider>
                     </LikesProvider>
                 </WatchlistProvider>
             </AvatarProvider>

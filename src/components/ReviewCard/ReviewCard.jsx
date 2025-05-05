@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import UserIcon from "../../components/UserIcon/UserIcon.jsx";
+import userPlaceholder from "../../assets/svgs/user.svg";
 import ThumbsUpIcon from "../../assets/svgs/thumbs-up.svg";
 import ThumbsDownIcon from "../../assets/svgs/thumbs-down.svg";
 import styles from "./ReviewCard.module.css";
@@ -10,18 +10,23 @@ const ReviewCard = ({
                         date,
                         reaction,
                         onShowAll,
-                        avatar
+                        avatar,
                     }) => {
-    const ReactionIcon = reaction === "like" ? ThumbsUpIcon : ThumbsDownIcon;
+    const ReactionIcon =
+        reaction === "like"
+            ? ThumbsUpIcon
+            : reaction === "dislike"
+                ? ThumbsDownIcon
+                : null;
 
     return (
         <div className={styles.reviewCard}>
             <header className={styles.header}>
-                {avatar ? (
-                    <img src={avatar} alt="avatar" className={styles.avatarImg} />
-                ) : (
-                    <UserIcon />
-                )}
+                <img
+                    src={avatar || userPlaceholder}
+                    alt={avatar ? `${username}'s avatar` : "default user icon"}
+                    className={`${styles.avatarImg} ${!avatar ? styles.whiteSvg : ""}`}
+                />
                 <span className={styles.username}>{username}</span>
             </header>
 
@@ -31,12 +36,21 @@ const ReviewCard = ({
 
             <footer className={styles.footer}>
                 <div className={styles.meta}>
-                    <img src={ReactionIcon} alt={reaction} className={styles.reactionIcon} />
+                    {ReactionIcon && (
+                        <img
+                            src={ReactionIcon}
+                            alt={reaction}
+                            className={styles.reactionIcon}
+                        />
+                    )}
                     <span className={styles.date}>{date}</span>
                 </div>
-                <button className={styles.showAll} onClick={onShowAll}>
-                    toon alles
-                </button>
+
+                {onShowAll && (
+                    <button className={styles.showAll} onClick={onShowAll}>
+                        toon alles
+                    </button>
+                )}
             </footer>
         </div>
     );
@@ -48,11 +62,11 @@ ReviewCard.propTypes = {
     text: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     reaction: PropTypes.oneOf(["like", "dislike"]).isRequired,
-    onShowAll: PropTypes.func,
+    onShowAll: PropTypes.func,          // optioneel, alleen nodig als je de "toon alles"-knop gebruikt
 };
 
 ReviewCard.defaultProps = {
-    onShowAll: () => {},
+    onShowAll: null,                    // geen callback = geen knop = geen warning
 };
 
 export default ReviewCard;

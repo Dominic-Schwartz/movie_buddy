@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -8,6 +8,7 @@ import CastCardRow from "../../components/CastCardRow/CastCardRow";
 import ReviewCardCarousel from "../../components/ReviewCardCarousel/ReviewCardCarousel";
 import LikeDislikeStats from "../../components/LikeDislikeStats/LikeDislikeStats";
 import { useWatchlist } from "../../hooks/useWatchlist";
+import { useReviews } from "../../hooks/useReviews";
 
 import PlusIcon from "../../assets/svgs/plus.svg";
 import MinIcon from "../../assets/svgs/minus.svg";
@@ -21,6 +22,8 @@ import { useLikes } from "../../hooks/useLikes";
 
 const MovieDetailPage = () => {
     const { id } = useParams();
+    const { reviews, userHasReviewed, submitReview } = useReviews(parseInt(id));
+    const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
     const { movie, credits, ageRating } = useMovieDetails(id);
     const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
     const { likeMovie, dislikeMovie, removeReaction, getReaction } = useLikes();
@@ -63,7 +66,6 @@ const MovieDetailPage = () => {
 
     const handleLike = (e) => {
         e.stopPropagation();
-        console.log("liked!");
         if (userReaction === "like") {
             removeReaction(parseInt(id));
         } else {
@@ -79,42 +81,6 @@ const MovieDetailPage = () => {
             dislikeMovie(parseInt(id));
         }
     };
-
-    const handleReview = (e) => {
-        e.stopPropagation();
-        console.log("Review button clicked!");
-    };
-
-    const dummyReviews = [
-        {
-            id: 1,
-            username: "Movie_F@n#1",
-            text: "Loved it!! Dit is een wat langere tekst om te testen of de kaart groeit.",
-            date: "25-1-2025",
-            reaction: "like",
-        },
-        {
-            id: 2,
-            username: "Cin@m_All",
-            text: "Seen better!",
-            date: "2-1-2025",
-            reaction: "dislike",
-        },
-        {
-            id: 3,
-            username: "M0v13M@n!4C",
-            text: "Best Movie ever!",
-            date: "15-5-2024",
-            reaction: "like",
-        },
-        {
-            id: 4,
-            username: "Dud3",
-            text: "Whatever!",
-            date: "15-5-2024",
-            reaction: "like",
-        },
-    ];
 
     return (
         <>
@@ -141,12 +107,37 @@ const MovieDetailPage = () => {
                                     />
 
                                     <Button
-                                        text="plaats review"
+                                        text={userHasReviewed ? "Review geplaatst" : "Plaats review"}
                                         icon={BubbleIcon}
                                         iconPosition="left"
-                                        onClick={handleReview}
+                                        onClick={() => {
+                                            if (!userHasReviewed) setIsReviewFormOpen(true);
+                                        }}
                                         variant="review"
+                                        disabled={userHasReviewed}
                                     />
+                                    {isReviewFormOpen && !userHasReviewed && (
+                                        <form
+                                            className={styles.reviewForm}
+                                            onSubmit={(e) => {
+                                                e.preventDefault();
+                                                const text = e.target.reviewText.value;
+                                                submitReview(text, userReaction);
+                                                setIsReviewFormOpen(false);
+                                            }}
+                                        >
+                                            <textarea name="reviewText" placeholder="Schrijf je review..." required />
+                                            <div>
+                                                <label>
+                                                    <input type="radio" name="reaction" value="like" defaultChecked /> 👍
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="reaction" value="dislike" /> 👎
+                                                </label>
+                                            </div>
+                                            <button type="submit">Verzenden</button>
+                                        </form>
+                                    )}
 
                                     <div className={styles.likeDislikeContainer}>
                                         <div className={styles.likeGroup}>
@@ -213,7 +204,8 @@ const MovieDetailPage = () => {
                         <p>Filmgegevens worden geladen...</p>
                     )}
                     {credits?.cast && <CastCardRow cast={credits.cast} />}
-                    <ReviewCardCarousel reviews={dummyReviews} />
+
+                    <ReviewCardCarousel reviews={reviews} />
                 </main>
                 <Footer />
             </div>

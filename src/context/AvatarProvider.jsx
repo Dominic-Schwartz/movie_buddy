@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { AvatarContext } from "./AvatarContext.js";
 import { useAuth } from "../hooks/useAuth";
 
@@ -9,26 +9,25 @@ export function AvatarProvider({ children }) {
     const [avatar, setAvatar] = useState(null);
 
     useEffect(() => {
-        if (username) {
-            const storedAvatar = localStorage.getItem(`avatar_${username}`);
-            if (storedAvatar) {
-                setAvatar(storedAvatar);
-            }
+        if (!username) {
+            setAvatar(null);
+            return;
         }
+
+        const stored = localStorage.getItem(`avatar_${username}`);
+        setAvatar(stored || null);
     }, [username]);
 
     const chooseAvatar = (avatarUrl) => {
-        if (username) {
-            localStorage.setItem(`avatar_${username}`, avatarUrl);
-            setAvatar(avatarUrl);
-        }
+        if (!username) return;
+        localStorage.setItem(`avatar_${username}`, avatarUrl);
+        setAvatar(avatarUrl);
     };
 
     const removeAvatar = () => {
-        if (username) {
-            localStorage.removeItem(`avatar_${username}`);
-            setAvatar(null);
-        }
+        if (!username) return;
+        localStorage.removeItem(`avatar_${username}`);
+        setAvatar(null);
     };
 
     return (
