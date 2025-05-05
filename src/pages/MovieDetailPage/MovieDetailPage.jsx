@@ -7,6 +7,7 @@ import Button from "../../components/Button/Button";
 import CastCardRow from "../../components/CastCardRow/CastCardRow";
 import ReviewCardCarousel from "../../components/ReviewCardCarousel/ReviewCardCarousel";
 import LikeDislikeStats from "../../components/LikeDislikeStats/LikeDislikeStats";
+import ReviewForm from "../../components/ReviewForm/ReviewForm.jsx";
 import { useWatchlist } from "../../hooks/useWatchlist";
 import { useReviews } from "../../hooks/useReviews";
 
@@ -117,26 +118,12 @@ const MovieDetailPage = () => {
                                         disabled={userHasReviewed}
                                     />
                                     {isReviewFormOpen && !userHasReviewed && (
-                                        <form
-                                            className={styles.reviewForm}
-                                            onSubmit={(e) => {
-                                                e.preventDefault();
-                                                const text = e.target.reviewText.value;
+                                        <ReviewForm
+                                            onSubmit={(text) => {
                                                 submitReview(text, userReaction);
-                                                setIsReviewFormOpen(false);
                                             }}
-                                        >
-                                            <textarea name="reviewText" placeholder="Schrijf je review..." required />
-                                            <div>
-                                                <label>
-                                                    <input type="radio" name="reaction" value="like" defaultChecked /> 👍
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="reaction" value="dislike" /> 👎
-                                                </label>
-                                            </div>
-                                            <button type="submit">Verzenden</button>
-                                        </form>
+                                            onCancel={() => setIsReviewFormOpen(false)}
+                                        />
                                     )}
 
                                     <div className={styles.likeDislikeContainer}>
