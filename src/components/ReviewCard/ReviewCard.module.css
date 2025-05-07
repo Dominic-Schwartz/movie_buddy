@@ -22,6 +22,13 @@
     height: 1.5rem;
 }
 
+.avatarImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .username {
     font-size: 0.875rem;
     font-weight: 600;
@@ -47,12 +54,17 @@
 .meta {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1.5rem;
 }
 
 .reactionIcon {
     width: 1rem;
     height: 1rem;
+    filter: brightness(0) invert(1);
+}
+
+.whiteSvg {
+    filter: brightness(0) invert(1);
 }
 
 .date {

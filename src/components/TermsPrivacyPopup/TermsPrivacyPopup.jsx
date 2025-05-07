@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Modal from "../../components/Modal/Modal";
-import "./TermsPrivacyPopup.css";
+import styles from "./TermsPrivacyPopup.module.css";
 
 const TermsPrivacyPopup = ({ isOpen, onClose, contentType }) => {
     const termsText = `
@@ -29,14 +29,14 @@ const TermsPrivacyPopup = ({ isOpen, onClose, contentType }) => {
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-            <div className="terms-privacy-content">
+            <div className={styles.termsPrivacyContent}>
                 <h2>{contentType === "terms" ? "Gebruikersvoorwaarden" : "Privacyverklaring"}</h2>
-                <div className="scrollable-content">
-                    {contentType === "terms"
-                        ? termsText.split("\n").map((line, index) => <p key={index}>{line}</p>)
-                        : privacyText.split("\n").map((line, index) => <p key={index}>{line}</p>)}
+                <div className={styles.scrollableContent}>
+                    {(contentType === "terms" ? termsText : privacyText)
+                        .split("\n")
+                        .map((line, index) => <p key={index}>{line}</p>)}
                 </div>
-                <button onClick={onClose} className="close-button">Sluiten</button>
+                <button onClick={onClose} className={styles.closeButton}>Sluiten</button>
             </div>
         </Modal>
     );

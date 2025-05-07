@@ -67,6 +67,7 @@ const ReviewCardCarousel = ({ reviews }) => {
                         <ReviewCard
                             key={r.id}
                             username={r.username}
+                            avatar={r.avatar}
                             text={r.text}
                             date={r.date}
                             reaction={r.reaction}
@@ -85,6 +86,7 @@ const ReviewCardCarousel = ({ reviews }) => {
                             <ReviewCard
                                 key={r.id}
                                 username={r.username}
+                                avatar={r.avatar}
                                 text={r.text}
                                 date={r.date}
                                 reaction={r.reaction}

@@ -79,13 +79,18 @@ const MovieRowCarousel = ({ title, fetchFunction, genreId }) => {
                         currentIndex * itemsPerPage,
                         (currentIndex + 1) * itemsPerPage
                     )
-                    .map(({ id, poster_path }) => (
+                    .map((movie) => (
                         <MovieCard
-                            key={id}
-                            movie={{ poster: `https://image.tmdb.org/t/p/w500${poster_path}` }}
-                            onClick={() => navigate(`/movie/${id}`)}
+                            key={movie.id}
+                            movie={{
+                                id: movie.id,
+                                title: movie.title,
+                                poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+                            }}
+                            onClick={() => navigate(`/movie/${movie.id}`)}
                         />
-                    ))}
+                    ))
+                }
             </div>
         </div>
     );

@@ -80,3 +80,40 @@ export const fetchHorrorMovies = () => axiosFetchByGenre(GENRE_IDS.horror);
 export const fetchAnimationMovies = () => axiosFetchByGenre(GENRE_IDS.animatie);
 export const fetchDramaMovies = () => axiosFetchByGenre(GENRE_IDS.drama);
 export const fetchAdventureMovies = () => axiosFetchByGenre(GENRE_IDS.avontuur);
+
+export const fetchMoviesByQuery = async (query) => {
+    try {
+        const response = await axios.get(`${TMDB_BASE_URL}/search/movie`, {
+            params: {
+                api_key: API_KEY,
+                query: query,
+                include_adult: false,
+                language: "nl-NL",
+            },
+        });
+        return response.data.results ?? [];
+    } catch (error) {
+        console.error(`Error fetching movies by query "${query}":`, error.message);
+        return [];
+    }
+};
+
+export const fetchSearchResults = async ({ query, genre, top }) => {
+    try {
+        if (query) return await fetchMoviesByQuery(query);
+
+        if (genre) {
+            const lower = genre.toLowerCase();
+            if (lower === "trending") {
+                return await fetchTrendingMovies(top ? 10 : 24);
+            } else {
+                return await fetchMoviesByGenreName(genre, top ? 10 : 24);
+            }
+        }
+
+        return [];
+    } catch (error) {
+        console.error("Error fetching search results:", error.message);
+        return [];
+    }
+};

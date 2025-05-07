@@ -20,7 +20,10 @@ const LandingPage = () => {
             <header className={styles.heroSection}>
                 <h1>Alles wat je moet weten over je favoriete films op één plek</h1>
                 <p>Maak een account aan en stel jouw persoonlijke watchlist samen – gratis en eenvoudig!</p>
-                <InputGroup placeholder="E-mailadres" buttonText="Registreren" onClick={() => navigate("/register")} />
+                <InputGroup
+                    placeholder="E-mailadres"
+                    buttonText="Registreren"
+                    onClick={(email) => navigate("/register", { state: { email } })} />
             </header>
 
             <section className={styles.featuresSection}>
@@ -32,7 +35,10 @@ const LandingPage = () => {
 
             <section className={styles.registerSection}>
                 <p>Maak een account aan en stel jouw persoonlijke watchlist samen – gratis en eenvoudig!</p>
-                <InputGroup placeholder="E-mailadres" buttonText="Registreren" onClick={() => navigate("/register")} />
+                <InputGroup
+                    placeholder="E-mailadres"
+                    buttonText="Registreren"
+                    onClick={(email) => navigate("/register", { state: { email } })} />
             </section>
 
             <Footer />

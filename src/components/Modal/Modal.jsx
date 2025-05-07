@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
-import "./Modal.css";
+import styles from "./Modal.module.css";
 
 const Modal = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <button className="modal-close" onClick={onClose}>×</button>
+        <div className={styles.modalOverlay} onClick={onClose}>
+            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                <button className={styles.modalClose} onClick={onClose}>×</button>
                 {children}
             </div>
         </div>

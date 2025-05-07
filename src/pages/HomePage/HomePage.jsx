@@ -1,4 +1,4 @@
-import "./HomePage.css";
+import styles from "./HomePage.module.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer.jsx";
 import MovieRowCarousel from "../../components/MovieRowCarousel/MovieRowCarousel";
@@ -34,22 +34,18 @@ const movieRows = [
 
 const HomePage = () => {
     return (
-        <div className="homePage">
-            <Navbar/>
-
+        <div className={styles.homePage}>
+            <Navbar />
             <TrailerCarousel />
-
             {movieRows.map((row, index) => (
-                <section key={index} className="carousel-section">
+                <section key={index} className={styles.carouselSection}>
                     <MovieRowCarousel
                         title={row.title}
                         fetchFunction={row.fetchFunction}
                     />
                 </section>
             ))}
-
-            <Footer/>
-
+            <Footer />
         </div>
     );
 };

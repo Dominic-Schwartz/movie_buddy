@@ -32,10 +32,9 @@
 .actorName {
     font-size: 0.875rem;
     font-weight: 600;
-    color: white;
     margin: 0;
     line-height: 1.2;
-    white-space: nowrap;
+    white-space: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -43,10 +42,10 @@
 .characterName {
     font-size: 0.875rem;
     font-weight: 400;
-    color: #ccc;
+    color: var(--secondary-contrast-color);
     margin: 0;
     line-height: 1.2;
-    white-space: nowrap;
+    white-space: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }

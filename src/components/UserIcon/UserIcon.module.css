@@ -1,4 +1,4 @@
-.user-icon-button {
+.userIconButton {
     background: none;
     border: none;
     cursor: pointer;
@@ -11,7 +11,7 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.user-icon-button img {
+.userIconImage {
     width: 2.5rem;
     height: 2.5rem;
     object-fit: contain;
@@ -19,10 +19,19 @@
     transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.user-icon-button:hover {
+.avatarImage {
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.userIconButton:hover .userIconImage,
+.userIconButton:hover .avatarImage {
     transform: scale(1.2);
 }
 
-.user-icon-button:hover img {
-    filter: invert(30%) sepia(100%) saturate(500%) hue-rotate(180deg);
+.userIconButton:hover .userIconImage {
+    filter: brightness(0) saturate(100%) invert(19%) sepia(98%) saturate(7487%) hue-rotate(242deg) brightness(104%) contrast(104%);
 }

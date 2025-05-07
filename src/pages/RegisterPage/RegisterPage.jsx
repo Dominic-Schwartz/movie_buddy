@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import InputField from "../../components/InputField/InputField";
 import PasswordStrengthIndicator from "../../components/PasswordStrengthIndicator/PasswordStrengthIndicator";
-import ErrorPopup from "../../components/ErrorPopup/ErrorPopup";
+import MessagePopup from "../../components/MessagePopup/MessagePopup.jsx";
 import TermsPrivacyPopup from "../../components/TermsPrivacyPopup/TermsPrivacyPopup";
 import TermsCheckbox from "../../components/TermsCheckbox/TermsCheckbox";
 import useRegister from "../../hooks/useRegister";
-import "./RegisterPage.css";
+import styles from "./RegisterPage.module.css";
 
 const RegisterPage = () => {
     const location = useLocation();
@@ -27,41 +27,76 @@ const RegisterPage = () => {
         passwordStrength
     } = useRegister(prefillEmail);
 
-    const [showPopup, setShowPopup] = useState(false);
-    const [popupContent, setPopupContent] = useState("");
+    const [popup, setPopup] = useState({ open: false, content: "" });
 
     const openPopup = (type) => {
-        setPopupContent(type);
-        setShowPopup(true);
+        setPopup({ open: true, content: type });
+    };
+
+    const closePopup = () => {
+        setPopup({ open: false, content: "" });
     };
 
     return (
-        <form className="auth-container" onSubmit={handleRegister}>
-            {error && <ErrorPopup message={error} onClose={() => setError("")} />}
-            {showPopup && <TermsPrivacyPopup isOpen={showPopup} onClose={() => setShowPopup(false)} contentType={popupContent} />}
+        <form className={styles.authContainer} onSubmit={handleRegister}>
+            {error && <MessagePopup message={error} onClose={() => setError("")} />}
+            {popup.open && (
+                <TermsPrivacyPopup
+                    isOpen={popup.open}
+                    onClose={closePopup}
+                    contentType={popup.content}
+                />
+            )}
 
-            <div className="auth-left">
-                <div className="logo-container">
-                    <p className="logo"><a href="/">MOVIE BUDDY</a></p>
+            <div className={styles.authLeft}>
+                <div className={styles.logoContainer}>
+                    <p className={styles.logo}>
+                        <Link to="/">MOVIE BUDDY</Link>
+                    </p>
                 </div>
 
-                <div className="register-container">
+                <div className={styles.registerContainer}>
                     <h2>Meld je gratis aan</h2>
 
-                    <InputField type="email" placeholder="E-mailadres" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <InputField type="password" placeholder="Wachtwoord" value={password} onChange={(e) => setPassword(e.target.value)} showToggle />
+                    <InputField
+                        type="email"
+                        placeholder="E-mailadres"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <InputField
+                        type="password"
+                        placeholder="Wachtwoord"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        showToggle
+                    />
 
-                    {password.length > 0 && <PasswordStrengthIndicator strength={passwordStrength} />}
+                    {password.length > 0 && (
+                        <PasswordStrengthIndicator strength={passwordStrength} />
+                    )}
 
-                    <TermsCheckbox isAccepted={isAccepted} setIsAccepted={setIsAccepted} openPopup={openPopup} />
+                    <TermsCheckbox
+                        isAccepted={isAccepted}
+                        setIsAccepted={setIsAccepted}
+                        openPopup={openPopup}
+                    />
 
-                    <Button text={loading ? "Bezig met registreren..." : "Aanmelden"} variant="login" type="submit" onClick={handleRegister} disabled={loading} />
+                    <Button
+                        text={loading ? "Bezig met registreren..." : "Aanmelden"}
+                        variant="login"
+                        type="submit"
+                        disabled={loading}
+                    />
 
-                    <p className="login-link">Heb je al een Movie Buddy account? <a href="/login">Dan kun je hier inloggen.</a></p>
+                    <p className={styles.loginLink}>
+                        Heb je al een Movie Buddy account?{" "}
+                        <Link to="/login">Dan kun je hier inloggen.</Link>
+                    </p>
                 </div>
             </div>
 
-            <div className="auth-right"></div>
+            <div className={styles.authRight}></div>
         </form>
     );
 };

@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
-import "./PasswordStrengthIndicator.css";
+import styles from "./PasswordStrengthIndicator.module.css";
 
 function PasswordStrengthIndicator({ strength }) {
-
     const getStrengthLabel = () => {
         switch (strength) {
             case 0:
@@ -20,7 +19,7 @@ function PasswordStrengthIndicator({ strength }) {
     };
 
     return (
-        <div className="password-strength-indicator">
+        <div className={styles.strengthIndicator}>
             <p>Wachtwoord sterkte: {getStrengthLabel()}</p>
         </div>
     );

@@ -9,6 +9,7 @@ const InputField = ({
                         placeholder,
                         value,
                         onChange,
+                        onKeyDown,
                         className = "",
                         showToggle = false,
                         showSearchIcon = false,
@@ -39,6 +40,7 @@ const InputField = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={handleInputChange}
+                onKeyDown={onKeyDown}
                 className={`${styles.inputField} ${className}`}
             />
 
@@ -56,6 +58,7 @@ InputField.propTypes = {
     placeholder: PropTypes.string.isRequired,
     value: PropTypes.string,
     onChange: PropTypes.func,
+    onKeyDown: PropTypes.func,
     className: PropTypes.string,
     showToggle: PropTypes.bool,
     showSearchIcon: PropTypes.bool,

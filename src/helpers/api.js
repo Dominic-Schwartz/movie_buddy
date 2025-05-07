@@ -1,19 +1,14 @@
-import axios from "axios";
+import client from "../api/client.js";
 
-const apiKey = import.meta.env.VITE_NOVI_API_KEY;
-import { API_URL } from "../constants/urls.js";
+export async function registerUser(email, password, username) {
 
-export async function registerUser(email, password) {
     try {
-        const response = await axios.post(
-            `${API_URL}?api_key=${apiKey}`,
-            { email, password },
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        );
+        const response = await client.post("/api/auth/signup", {
+            username,
+            email,
+            password,
+            role: ["user"],
+        });
 
         if (response.status === 200) {
             return {

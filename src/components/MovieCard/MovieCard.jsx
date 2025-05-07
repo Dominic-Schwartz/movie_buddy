@@ -1,4 +1,3 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./MovieCard.module.css";
 import Button from "../Button/Button";
@@ -6,21 +5,30 @@ import PlusIcon from "../../assets/svgs/plus.svg";
 import MinIcon from "../../assets/svgs/minus.svg";
 import ThumbsUpIcon from "../../assets/svgs/thumbs-up.svg";
 import ThumbsDownIcon from "../../assets/svgs/thumbs-down.svg";
+import { useLikes } from "../../hooks/useLikes";
+import { useWatchlistToggle } from "../../hooks/useWatchlistToggle";
 
 const MovieCard = ({ movie, onClick }) => {
-    const [isInWatchlist, setIsInWatchlist] = useState(false);
-    const [liked, setLiked] = useState(null);
+    const { isActive: isInWatchlist, toggleWatchlist: handleWatchlistToggle } = useWatchlistToggle(movie);
+    const { likeMovie, dislikeMovie, removeReaction, getReaction } = useLikes();
+    const userReaction = getReaction(movie.id);
 
-    const handleWatchlistToggle = () => {
-        setIsInWatchlist(!isInWatchlist);
+    const handleLike = (e) => {
+        e.stopPropagation();
+        if (userReaction === "like") {
+            removeReaction(movie.id);
+        } else {
+            likeMovie(movie.id);
+        }
     };
 
-    const handleLike = () => {
-        setLiked(liked === true ? null : true);
-    };
-
-    const handleDislike = () => {
-        setLiked(liked === false ? null : false);
+    const handleDislike = (e) => {
+        e.stopPropagation();
+        if (userReaction === "dislike") {
+            removeReaction(movie.id);
+        } else {
+            dislikeMovie(movie.id);
+        }
     };
 
     return (
@@ -42,27 +50,19 @@ const MovieCard = ({ movie, onClick }) => {
                     variant="watchlist"
                     active={isInWatchlist}
                 />
-
                 <Button
                     icon={ThumbsUpIcon}
                     iconPosition="left"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleLike();
-                    }}
+                    onClick={handleLike}
                     variant="like"
-                    active={liked === true}
+                    active={userReaction === "like"}
                 />
-
                 <Button
                     icon={ThumbsDownIcon}
                     iconPosition="left"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleDislike();
-                    }}
+                    onClick={handleDislike}
                     variant="dislike"
-                    active={liked === false}
+                    active={userReaction === "dislike"}
                 />
             </div>
         </div>
@@ -71,7 +71,9 @@ const MovieCard = ({ movie, onClick }) => {
 
 MovieCard.propTypes = {
     movie: PropTypes.shape({
+        id: PropTypes.number.isRequired,
         poster: PropTypes.string.isRequired,
+        title: PropTypes.string,
     }).isRequired,
     onClick: PropTypes.func.isRequired,
 };

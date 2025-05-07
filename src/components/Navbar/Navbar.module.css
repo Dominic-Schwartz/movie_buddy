@@ -1,3 +1,6 @@
+/* =========================
+   BASIS NAVBAR STYLING
+========================= */
 .navbar {
     position: fixed;
     top: 0;
@@ -36,6 +39,9 @@
     flex-wrap: nowrap;
 }
 
+/* =========================
+   LOGO STYLING
+========================= */
 .logo {
     cursor: pointer;
     flex-shrink: 1;
@@ -44,6 +50,7 @@
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .logoText {
@@ -52,9 +59,18 @@
     color: var(--signature-color);
 }
 
+.logo:hover {
+    transform: scale(1.05);
+    color: #ffcc00;
+}
+
+/* =========================
+   NAVBAR ITEMS STYLING
+========================= */
 .buttonGroup {
     display: flex;
     align-items: center;
+    position: relative;
     gap: 1rem;
 }
 
@@ -69,6 +85,97 @@
 .searchWrapper {
     max-width: 330px;
     width: 100%;
+}
+
+.userWrapper {
+    position: relative;
+}
+
+.userMenu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    min-width: 200px;
+    background-color: var(--secondary-background-color);
+    border: 2px solid var(--main-contrast-color);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    animation: fadeSlideIn 0.3s ease forwards;
+    z-index: 1000;
+}
+
+.userMenu:hover {
+    border-color: var(--signature-color);
+}
+
+.suggestionsBox {
+    position: absolute;
+    background: var(--secondary-background-color);
+    border: 2px solid var(--main-contrast-color);
+    width: 300px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    border-radius: 15px;
+    margin-top: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.suggestionItem {
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.suggestionItem:hover {
+    background-color: var(--signature-color);
+}
+
+.genresDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--secondary-background-color);
+    border: 2px solid var(--main-contrast-color);
+    max-height: 300px;
+    overflow-y: auto;
+    width: 200px;
+    z-index: 1000;
+    margin-top: 8px;
+    border-radius: 15px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.genreItem {
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.genreItem:hover {
+    background-color: var(--signature-color);
+}
+
+.genresDropdown::-webkit-scrollbar,
+.suggestionsBox::-webkit-scrollbar {
+    display: none;
+}
+
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @media (max-width: 925px) {
