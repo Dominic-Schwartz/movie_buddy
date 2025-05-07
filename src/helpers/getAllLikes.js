@@ -20,7 +20,6 @@ export const getAllLikes = () => {
             }
         }
     }
-    console.log("📦 Alle likes uit alle gebruikers:", allReactionsPerMovie);
 
     return allReactionsPerMovie;
 };

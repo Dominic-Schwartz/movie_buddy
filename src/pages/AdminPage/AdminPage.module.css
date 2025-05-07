@@ -1,0 +1,62 @@
+.adminContainer {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.adminLeft {
+    flex: 0 0 900px;
+    background-color: var(--main-background-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    color: var(--main-contrast-color);
+    padding: 2rem;
+}
+
+.adminRight {
+    flex: 1 1 auto;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.85), transparent 50%),
+    url('../../assets/images/background-image-unauth.jpg') center/cover no-repeat;
+    min-height: 100vh;
+}
+
+.header {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 450px;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    padding-top: 2.2rem;
+    gap: 1.5rem;
+}
+
+.buttonWrapper {
+    margin-top: auto;
+    padding-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .adminRight {
+        display: none;
+    }
+
+    .adminLeft {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}
+

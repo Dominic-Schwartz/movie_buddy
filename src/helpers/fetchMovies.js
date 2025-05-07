@@ -98,16 +98,16 @@ export const fetchMoviesByQuery = async (query) => {
     }
 };
 
-export const fetchSearchResults = async ({ query, genre, isTop }) => {
+export const fetchSearchResults = async ({ query, genre, top }) => {
     try {
         if (query) return await fetchMoviesByQuery(query);
 
         if (genre) {
             const lower = genre.toLowerCase();
             if (lower === "trending") {
-                return await fetchTrendingMovies(isTop ? 10 : 24);
+                return await fetchTrendingMovies(top ? 10 : 24);
             } else {
-                return await fetchMoviesByGenreName(genre);
+                return await fetchMoviesByGenreName(genre, top ? 10 : 24);
             }
         }
 

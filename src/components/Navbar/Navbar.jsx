@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { fetchMoviesByQuery } from "../../helpers/fetchMovies";
+import { useScrollPosition } from "../../hooks/useScrollPosition";
+import { useSearchSuggestions } from "../../hooks/useSearchSuggestions";
+import { useClickOutside } from "../../hooks/useClickOutside";
 import styles from "./Navbar.module.css";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
@@ -12,50 +14,27 @@ import { GENRE_IDS } from "../../constants/urls";
 const Navbar = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    const { logout, user } = useAuth();
+    const isAdmin = user?.roles?.includes("ROLE_ADMIN");
 
     const [searchTerm, setSearchTerm] = useState("");
-    const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isPickerOpen, setIsPickerOpen] = useState(false);
     const [isGenresOpen, setIsGenresOpen] = useState(false);
-    const [suggestions, setSuggestions] = useState([]);
+
+    const { suggestions, updateSuggestions, clearSuggestions } = useSearchSuggestions();
+    const isScrolled = useScrollPosition();
 
     const menuWrapperRef = useRef(null);
     const searchWrapperRef = useRef(null);
     const genresWrapperRef = useRef(null);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (menuWrapperRef.current && !menuWrapperRef.current.contains(event.target)) {
-                setIsMenuOpen(false);
-                setIsPickerOpen(false);
-            }
-            if (searchWrapperRef.current && !searchWrapperRef.current.contains(event.target)) {
-                setSuggestions([]);
-            }
-            if (genresWrapperRef.current && !genresWrapperRef.current.contains(event.target)) {
-                setIsGenresOpen(false);
-            }
-        };
-
-        window.addEventListener("mousedown", handleClickOutside);
-
-        return () => {
-            window.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
+    useClickOutside([menuWrapperRef, searchWrapperRef, genresWrapperRef], () => {
+        setIsMenuOpen(false);
+        setIsPickerOpen(false);
+        clearSuggestions();
+        setIsGenresOpen(false);
+    });
 
     const handleLogoClick = () => {
         if (location.pathname === "/home") {
@@ -65,26 +44,18 @@ const Navbar = () => {
         }
     };
 
-    const handleSearchChange = async (e) => {
+    const handleSearchChange = (e) => {
         const value = e.target.value;
         setSearchTerm(value);
 
-        if (value.trim().length >= 2) {
-            try {
-                const response = await fetchMoviesByQuery(value);
-                setSuggestions(response.slice(0, 5));
-            } catch (error) {
-                console.error("Error fetching suggestions:", error);
-                setSuggestions([]);
-            }
-        } else {
-            setSuggestions([]);
-        }
+        updateSuggestions(value).catch((err) => {
+            console.error("❌ Fout bij het ophalen van suggesties:", err);
+        });
     };
 
     const handleSearch = () => {
         if (searchTerm.trim()) {
-            setSuggestions([]); // sluit suggesties
+            clearSuggestions();
             navigate(`/search?query=${encodeURIComponent(searchTerm.trim())}`);
         }
     };
@@ -107,7 +78,6 @@ const Navbar = () => {
                     </div>
 
                     <div className={styles.buttonGroup}>
-
                         <div ref={genresWrapperRef} className={styles.buttonGroup}>
                             <Button
                                 text="Genres"
@@ -166,7 +136,7 @@ const Navbar = () => {
                                         key={movie.id}
                                         className={styles.suggestionItem}
                                         onClick={() => {
-                                            setSuggestions([]);
+                                            clearSuggestions();
                                             navigate(`/movie/${movie.id}`);
                                         }}
                                     >
@@ -183,6 +153,9 @@ const Navbar = () => {
                             <div className={styles.userMenu}>
                                 <Button text="Avatar kiezen" variant="menu" onClick={() => setIsPickerOpen(true)} />
                                 <Button text="Watchlist" variant="menu" onClick={() => navigate("/watchlist")} />
+                                {isAdmin && (
+                                    <Button text="Admin pagina" variant="menu" onClick={() => navigate("/admin")} />
+                                )}
                                 <Button text="Uitloggen" variant="menu" onClick={handleLogout} />
                             </div>
                         )}

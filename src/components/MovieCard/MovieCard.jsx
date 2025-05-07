@@ -9,8 +9,7 @@ import { useLikes } from "../../hooks/useLikes";
 import { useWatchlistToggle } from "../../hooks/useWatchlistToggle";
 
 const MovieCard = ({ movie, onClick }) => {
-    const { isInWatchlist, handleWatchlistToggle } = useWatchlistToggle(movie);
-
+    const { isActive: isInWatchlist, toggleWatchlist: handleWatchlistToggle } = useWatchlistToggle(movie);
     const { likeMovie, dislikeMovie, removeReaction, getReaction } = useLikes();
     const userReaction = getReaction(movie.id);
 
@@ -44,7 +43,10 @@ const MovieCard = ({ movie, onClick }) => {
                     text="watchlist"
                     icon={isInWatchlist ? MinIcon : PlusIcon}
                     iconPosition="left"
-                    onClick={handleWatchlistToggle}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleWatchlistToggle();
+                    }}
                     variant="watchlist"
                     active={isInWatchlist}
                 />

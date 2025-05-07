@@ -9,20 +9,19 @@ export const WatchlistProvider = ({ children }) => {
     const username = user?.username;
 
     useEffect(() => {
-        if (username) {
-            const stored = localStorage.getItem(`watchlist_${username}`);
-            if (stored) {
-                setWatchlist(JSON.parse(stored));
-            } else {
-                setWatchlist([]);
-            }
+        if (!username) return;
+
+        const stored = localStorage.getItem(`watchlist_${username}`);
+        if (stored) {
+            setWatchlist(JSON.parse(stored));
         }
     }, [username]);
 
     useEffect(() => {
-        if (username) {
-            localStorage.setItem(`watchlist_${username}`, JSON.stringify(watchlist));
-        }
+        if (!username) return;
+        if (watchlist.length === 0) return;
+
+        localStorage.setItem(`watchlist_${username}`, JSON.stringify(watchlist));
     }, [watchlist, username]);
 
     const addToWatchlist = (movie) => {

@@ -8,6 +8,7 @@ import MovieDetailPage from './pages/MovieDetailPage/MovieDetailPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import UnauthorizedPage from './pages/UnauthorizedPage/UnauthorizedPage';
 import WatchlistPage from "./pages/WatchlistPage/WatchlistPage.jsx";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 function App() {
 
@@ -25,9 +26,9 @@ function App() {
                 <Route path="/movie/:id" element={<MovieDetailPage />} />
             </Route>
 
-            {/*<Route element={<ProtectedRoute requiredRoles={['ROLE_ADMIN']} />}>*/}
-            {/*    <Route path="/admin" element={<AdminDashboard />} />*/}
-            {/*</Route>*/}
+            <Route element={<ProtectedRoute requiredRoles={['ROLE_ADMIN']} />}>
+                <Route path="/admin" element={<AdminPage />} />
+            </Route>
 
             <Route path="/unauthorized" element={<UnauthorizedPage />} />
         </Routes>
