@@ -82,9 +82,8 @@ De app is nu bereikbaar op [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 🖼️ Voorbeeldscherm
-
-![Movie Detail Page](./assets/images/screenshot-detailpage.png)
+## 🖼️ Film Detail Pagina uit Movie Buddy
+![screenshot-detailpage.png](src/assets/images/screenshot-detailpage.png)
 
 ---
 
