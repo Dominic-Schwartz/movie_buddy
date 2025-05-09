@@ -1,6 +1,18 @@
-# 🎬 Movie Buddy
+# 🎬 Movie Buddy - Installatiehandleiding
 
-**Movie Buddy** is een interactieve React-applicatie voor filmliefhebbers. Gebruikers kunnen films zoeken, ontdekken, toevoegen aan hun watchlist en reviews schrijven. Admin gebruikers beschikken over extra rechten zoals toegang tot de admin pagina.
+## 📌 Inleiding
+Welkom bij **Movie Buddy**, de ultieme webapplicatie voor filmliefhebbers! 🎬
+Met Movie Buddy kun je:
+- Films zoeken en ontdekken via **The Movie Database (TMDb)** API.
+- Een **persoonlijke watchlist** bijhouden.
+- Beoordelingen geven aan films met een **like/dislike-systeem**.
+- Een **review schrijven** voor elke film in de database.
+- Inloggen en registreren via de **NOVI-backend**.
+
+---
+
+## 🖼️ Film Detail Pagina uit Movie Buddy
+![screenshot-detailpage.png](src/assets/images/screenshot-detailpage.png)
 
 ---
 
@@ -27,9 +39,26 @@ Deze applicatie is ontwikkeld als eindopdracht voor de front-end opleiding van N
 
 ---
 
-## 🖥️ Installatiehandleiding
+## 🛠️ Benodigdheden
 
-Volg deze stappen om Movie Buddy lokaal te draaien:
+Deze applicatie is bedoeld om lokaal te draaien op je eigen computer.
+Je hebt hiervoor een zogeheten IDE (ontwikkelomgeving) nodig. Bekende voorbeelden zijn::
+
+- [WebStorm (JetBrains)](https://www.jetbrains.com/webstorm/)
+- [Visual Studio Code (VS Code)](https://code.visualstudio.com/)
+
+Vervolgens zorg je ervoor dat je de volgende software hebt geïnstalleerd:
+
+- **Git** - [Download hier](https://git-scm.com/)
+- **Node.js** (v16 of hoger) - [Download hier](https://nodejs.org/)
+- **NPM** (meegeleverd met Node.js)
+
+Daarnaast heb je een **API Key** nodig van [TMDb](https://www.themoviedb.org/) om filmgegevens op te halen.
+Voor de examinatoren van NOVI Hogeschool wordt de **API Key** beschikbaar gesteld middels een apart document.
+
+---
+
+## 🔧 Installatie-instructies
 
 1. **Clone de repository:**
 
@@ -64,6 +93,20 @@ npm run dev
 
 De app is nu bereikbaar op [http://localhost:5173](http://localhost:5173)
 
+## 🎯 Conclusie
+Gefeliciteerd! 🎉 Je hebt **Movie Buddy** succesvol geïnstalleerd en draaiende.
+
+---
+
+## 📜 Beschikbare npm-commando's
+
+| Commando       | Beschrijving |
+|---------------|-------------|
+| `npm run dev` | Start de ontwikkelserver op `http://localhost:5173/` |
+| `npm run build` | Maakt een productie-build van de applicatie |
+| `npm run preview` | Bekijkt de productie-build lokaal |
+| `npm install` | Installeert alle benodigde dependencies |
+
 ---
 
 ## 👥 Gebruikersrollen & Functionaliteiten
@@ -78,12 +121,19 @@ De app is nu bereikbaar op [http://localhost:5173](http://localhost:5173)
 
 ### 🔸 Admin
 - Alle gebruikersfunctionaliteiten
-- Extra toegang tot adminpagina
+- Extra toegang tot admin-pagina
 
 ---
 
-## 🖼️ Film Detail Pagina uit Movie Buddy
-![screenshot-detailpage.png](src/assets/images/screenshot-detailpage.png)
+## 🔐 Admin inloggegevens
+
+Aangezien de beperkte back-end capaciteit, zijn de adminrechten gekoppeld aan een specifiek e-mailadres:
+
+**Admin gebruiker:**
+- **E-mailadres:** `adminbuddy@moviebuddy.nl`
+- **Wachtwoord:** `AdminTest@1234`
+
+Gebruik dit account om toegang te krijgen tot de admin functionaliteiten.
 
 ---
 
