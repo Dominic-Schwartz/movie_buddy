@@ -1,5 +1,21 @@
 # 🎬 Movie Buddy - Installatiehandleiding
 
+---
+
+## 📖 Inhoudsopgave
+
+1. [Inleiding](#-inleiding)
+2. [Voorbeeldscherm](#-film-detail-pagina-uit-movie-buddy)
+3. [Projectoverzicht](#-projectoverzicht)
+4. [Gebruikte technieken](#-gebruikte-technieken)
+5. [Installatie-instructies](#-installatie-instructies)
+6. [NPM-commando's](#-beschikbare-npm-commando's)
+7. [Inloggen als Admin](#-inloggen-als-admin)
+8. [Gebruikersrollen](#-gebruikersrollen--functionaliteiten)
+9. [NOVI-eindopdracht checklist](#-novi-eindopdracht-vereisten)
+
+---
+
 ## 📌 Inleiding
 Welkom bij **Movie Buddy**, de ultieme webapplicatie voor filmliefhebbers! 🎬
 Met Movie Buddy kun je:
@@ -39,60 +55,54 @@ Deze applicatie is ontwikkeld als eindopdracht voor de front-end opleiding van N
 
 ---
 
-## 🛠️ Benodigdheden
-
-Deze applicatie is bedoeld om lokaal te draaien op je eigen computer.
-Je hebt hiervoor een zogeheten IDE (ontwikkelomgeving) nodig. Bekende voorbeelden zijn::
-
-- [WebStorm (JetBrains)](https://www.jetbrains.com/webstorm/)
-- [Visual Studio Code (VS Code)](https://code.visualstudio.com/)
-
-Vervolgens zorg je ervoor dat je de volgende software hebt geïnstalleerd:
-
-- **Git** - [Download hier](https://git-scm.com/)
-- **Node.js** (v16 of hoger) - [Download hier](https://nodejs.org/)
-- **NPM** (meegeleverd met Node.js)
-
-Daarnaast heb je een **API Key** nodig van [TMDb](https://www.themoviedb.org/) om filmgegevens op te halen.
-Voor de examinatoren van NOVI Hogeschool wordt de **API Key** beschikbaar gesteld middels een apart document.
-
----
-
 ## 🔧 Installatie-instructies
 
-1. **Clone de repository:**
+1. **Download en installeer eerst deze programma’s:**
+    - [Node.js](https://nodejs.org/) (versie 16 of hoger)
+    - [Git](https://git-scm.com/)
+    - Een ontwikkelprogramma (IDE), bijvoorbeeld:  
+      [WebStorm](https://www.jetbrains.com/webstorm/) of [Visual Studio Code](https://code.visualstudio.com/)
 
-```bash
-git clone <repo-url>
-```
+2. **Download het project:**
+    - Ga naar [https://github.com/Dominic-Schwartz/movie_buddy](https://github.com/Dominic-Schwartz/movie_buddy)
+    - Klik op de groene knop **‘Code’** en kies **‘Download ZIP’**
+    - Pak het ZIP-bestand uit op een plek naar keuze
 
-2. **Navigeer naar de projectmap:**
+3. **Open het project in je IDE**
 
-```bash
-cd movie-buddy
-```
+4. **Open de terminal:**
+    - In WebStorm: klik onderin op `Terminal`
+    - In VS Code: klik op `View > Terminal`
 
-3. **Installeer dependencies:**
+5. **Installeer de benodigde onderdelen:**
 
 ```bash
 npm install
 ```
 
-4. **Maak een `.env` bestand aan in de root:**
+6. **Maak een `.env` bestand aan in de hoofdmap van het project (dus naast `package.json`)**
+
+Plak de volgende regels in dat bestand:
 
 ```env
 VITE_API_KEY=YOUR_TMDB_API_KEY
 VITE_NOVI_API_URL=https://frontend-educational-backend.herokuapp.com
 ```
 
-5. **Start de app:**
+> 🔑 **LET OP:**  
+> Vervang `YOUR_TMDB_API_KEY` door een echte API Key van [TMDb](https://www.themoviedb.org/).  
+> Je kunt gratis een eigen API Key aanvragen via hun website.
+
+> 🧪 **Voor examinatoren van NOVI Hogeschool:**  
+> Een werkende API Key is bijgevoegd in een apart document genaamd `API_KEY_README.txt`.
+
+7. **Start de applicatie:**
 
 ```bash
 npm run dev
 ```
 
-De app is nu bereikbaar op [http://localhost:5173](http://localhost:5173)
-
+De app wordt nu automatisch geopend in je browser op [http://localhost:5173](http://localhost:5173)
 ## 🎯 Conclusie
 Gefeliciteerd! 🎉 Je hebt **Movie Buddy** succesvol geïnstalleerd en draaiende.
 
@@ -106,6 +116,18 @@ Gefeliciteerd! 🎉 Je hebt **Movie Buddy** succesvol geïnstalleerd en draaiend
 | `npm run build` | Maakt een productie-build van de applicatie |
 | `npm run preview` | Bekijkt de productie-build lokaal |
 | `npm install` | Installeert alle benodigde dependencies |
+
+---
+
+## 🔐 Admin inloggegevens
+
+Aangezien de beperkte back-end capaciteit, zijn de adminrechten gekoppeld aan een specifiek e-mailadres:
+
+**Admin gebruiker:**
+- **E-mailadres:** `adminbuddy@moviebuddy.nl`
+- **Wachtwoord:** `AdminTest@1234`
+
+Gebruik dit account om toegang te krijgen tot de admin functionaliteiten.
 
 ---
 
@@ -125,18 +147,6 @@ Gefeliciteerd! 🎉 Je hebt **Movie Buddy** succesvol geïnstalleerd en draaiend
 
 ---
 
-## 🔐 Admin inloggegevens
-
-Aangezien de beperkte back-end capaciteit, zijn de adminrechten gekoppeld aan een specifiek e-mailadres:
-
-**Admin gebruiker:**
-- **E-mailadres:** `adminbuddy@moviebuddy.nl`
-- **Wachtwoord:** `AdminTest@1234`
-
-Gebruik dit account om toegang te krijgen tot de admin functionaliteiten.
-
----
-
 ## ✅ NOVI-eindopdracht vereisten
 
 | Onderdeel                         | Status |
@@ -148,14 +158,6 @@ Gebruik dit account om toegang te krijgen tot de admin functionaliteiten.
 | Wireframes + schermontwerpen    | ✅     |
 | Documentatie en testen          | ✅     |
 | Sessiebeheer + gebruikerscontext | ✅     |
-
----
-
-## 📚 Verantwoordingsdocument & bronnen
-
-- [Functioneel ontwerp PDF](./Functioneel%20Ontwerp%20Movie%20Buddy.pdf)
-- [Figma-ontwerpen](https://www.figma.com/)
-- [TMDB API](https://www.themoviedb.org/documentation/api)
 
 ---
 
